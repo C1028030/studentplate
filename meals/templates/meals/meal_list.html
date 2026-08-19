@@ -1,0 +1,53 @@
+{% extends "meals/base.html" %}
+
+{% block title %}
+    Find Meals | StudentPlate
+{% endblock %}
+
+{% block content %}
+    <!--- Catalogue introduction --->
+    <section class="page-heading">
+        <p class="eyebrow">Meal finder</p>
+        <h1>Affordable meals for student life</h1>
+
+        <p>
+            Explore simple meal ideas based on estimated cost and
+            preparation time.
+        </p>
+    </section>
+
+    <!--- Meal catalogue --->
+    <section class="catalogue-section">
+        <div class="catalogue-heading">
+            <h2>Available meals</h2>
+
+            <p>
+                {{ meals|length }}
+                meal{{ meals|length|pluralize }} found
+            </p>
+        </div>
+
+        <div class="meal-grid">
+            {% for meal in meals %}
+            <article class="meal-card">
+                <div class="meal-card-content">
+                    <p class="meal-category">
+                        {{ meal.category }}
+                    </p>
+
+                    <h3>{{ meal.name }}</h3>
+
+                    <p>{{ meal.description }}</p>
+
+                    <div class="meal-information">
+                        <strong>£{{ meal.price|floatformat:2 }}</strong>
+                        <span>{{ meal.prep_time }} minutes</span>
+                    </div>
+                </div>
+            </article>
+        {% empty %}
+            <p>No meals are currently available</p>
+        {% endfor %}
+        </div>
+    </section>
+{% endblock %}

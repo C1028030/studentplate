@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}StudentPlate{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'meals/css/style.css' %}">
+</head>
+<body>
+    <!--- Shared navigation --->
+    <header class="site-header">
+        <nav class="navbar">
+            <a class="logo" href="{% url 'home' %}">StudentPlate</a>
+
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'meal_list' %}">Find Meals</a></li>
+                <li><a href="#">My Budget</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!--- Each page inserts its content here --->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!--- Shared footer --->
+    <footer class="site-footer">
+        <p>StudentPlate prototype for Sheffield Hallam students.</p>
+    </footer>
+</body>
+</html>

@@ -1,72 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudentPlate</title>
-</head>
-<body>
-    <!--- Homepage Navigation --->
-    <header>
-        <nav>
-            <a href="/">StudentPlate</a>
+{% extends "meals/base.html" %}
 
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="#">Find Meals</a></li>
-                <li><a href="#">My Budget</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <main>
-        <!--- Main Introduction Section --->
-        <section>
-            <p>Health eating made student-friendly</p>
+{% block title %}
+    Home | StudentPlate
+{% endblock %}
 
-            <h1>Eat healthier without stretching your budget</h1>
+{% block content %}
+    <!--- Main introcution --->
+    <section class="hero">
+        <div class="hero-content">
+            <p class="eyebrow">Healthy eating made student-friendly</p>
 
-            <p>
+            <h1>Eat healther without stretching your budget</h1>
+
+            <p class="hero-description">
                 Discover simple and affordable meals designed to help
-                Sheffield Hallam students maintain a healthier lifestyle.
+                Sheffield Hallam students maintain a healther lifestyle.
             </p>
 
-            <a href="#">Find affordable meals</a>
-            <a href="#">Set my budget</a>
-        </section>
+            <div class="hero-buttons">
+                <a class="button primary-button" href="{% url 'meal_list' %}">Find affordable meals</a>
+                <a class="button secondary-button" href="#">Set my budget</a>
+            </div>
+        </div>
+    </section>
 
-        <!--- Featured meals section --->
-        <section>
+    <!--- Featured meals --->
+    <section class="featured-section">
+        <div class="section-heading">
+            <p class="eyebrow">Recommended</p>
             <h2>Affordable meals to try</h2>
+        </div>
 
-            <article>
-                <h3>Chicken and vegetable rice bowl</h3>
-                <p>A filling, high-protein meal using affordable ingredients.</p>
-                <p>Estimated cost: £2.35</p>
+        <div class="meal-grid">
+            <article class="meal-card">
+                <div class="meal-card-content">
+                    <p class="meal-category">High Protein</p>
+                    <h3>Chicken and vegetable rice bowl</h3>
+                    <p>
+                        A filling, high-protein meal using affordable
+                        cupboard ingredients.
+                    </p>
+
+                    <div class="meal-information">
+                        <strong>£2.35</strong>
+                        <span>25 Minutes</span>
+                    </div>
+                </div>
             </article>
 
-            <article>
-                <h3>Tuna tomato pasta</h3>
-                <p>A simple student meal that is inexpensive and easy to prepare.</p>
-                <p>Estimated cost: £1.90</p>
+            <article class="meal-card">
+                <div class="meal-card-content">
+                    <p class="meal-category">Vegetarian</p>
+                    <h3>Spiced chickpea wraps</h3>
+                    <p>
+                        A quick vegetarian meal containing protein and fibre.
+                    </p>
+
+                    <div class="meal-information">
+                        <strong>£1.65</strong>
+                        <span>15 Minutes</span>
+                    </div>
+                </div>
             </article>
-        </section>
 
-        <!--- User journey explanation --->
-        <section>
-            <h2>How it works</h2>
+            <article class="meal-card">
+                <div class="meal-card-content">
+                    <p class="meal-category">Under £2</p>
+                    <h3>Tuna tomato pasta</h3>
+                    <p>
+                        A simple student meal that is inexpensive and
+                        easy to prepare.
+                    </p>
 
-            <ol>
-                <li>Set your weekly food budget.</li>
-                <li>Discover meals matching your needs.</li>
-                <li>Build an affordable meal plan.</li>
-            </ol>
-        </section>
-    </main>
+                    <div class="meal-information">
+                        <strong>£1.90</strong>
+                        <span>20 Minutes</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
 
-    <footer>
-        <p>StudentPlate prototype for Sheffield Hallam students.</p>
-    </footer>
-    
-</body>
-</html>
+    <!--- User Journey --->
+    <section class="steps-section">
+        <div class="section-heading">
+            <p class="eyebrow">How it works</p>
+            <h2>Three simple steps</h2>
+        </div>
+
+        <div class="steps-grid">
+            <article class="step">
+                <span>1</span>
+                <h3>Set your budget</h3>
+                <p>Choose how much you can comfortable spend each week.</p>
+            </article>
+
+            <article class="step">
+                <span>2</span>
+                <h3>Explore meals</h3>
+                <p>Discover meals based on cost and preparation time.</p>
+            </article>
+
+            <article class="step">
+                <span>3</span>
+                <h3>Build a plan</h3>
+                <p>Choose meals that fit your weekly student budget.</p>
+            </article>
+        </div>
+    </section>
+{% endblock %}

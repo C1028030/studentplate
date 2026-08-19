@@ -1,0 +1,330 @@
+/* Removes default browser spacing and makes sizing predictable */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #f8faf7;
+    color: #1d2a24;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Navigation */
+
+.site-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #dfe7e2;
+}
+
+.navbar {
+    max-width: 1200px;
+    min-height: 72px;
+    margin: 0 auto;
+    padding: 0 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    color: #176b52;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-links a {
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: #176b52;
+}
+
+/* Homepage */
+
+.hero {
+    min-height: 540px;
+    padding: 90px 24px;
+
+    display: flex;
+    align-items: center;
+
+    background-color: #eaf5ef;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.eyebrow {
+    margin-bottom: 10px;
+
+    color: #176b52;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    max-width: 750px;
+    margin: 0 0 24px;
+
+    font-size: 4rem;
+    line-height: 1.1;
+}
+
+.hero-description {
+    max-width: 620px;
+    color: #5e6d65;
+    font-size: 1.15rem;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    margin-top: 32px;
+}
+
+.button {
+    display: inline-block;
+    padding: 13px 20px;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    font-weight: bold;
+}
+
+.primary-button {
+    background-color: #176b52;
+    color: #ffffff;
+}
+
+.primary-button:hover {
+    background-color: #0e4f3c;
+}
+
+.secondary-button {
+    background-color: #ffffff;
+    border-color: #cad7d0;
+}
+
+/* Featured meals */
+
+.featured-section,
+.steps-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 70px 24px;
+}
+
+.section-heading {
+    margin-bottom: 28px
+}
+
+.section-heading h2 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.meal-grid,
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.meal-card {
+    overflow: hidden;
+
+    background-color: #ffffff;
+    border: 1px solid #dfe7e2;
+    border-radius: 14px;
+}
+
+.meal-card-content {
+    padding: 24px;
+}
+
+.meal-category {
+    color: #176b52;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.meal-card h3 {
+    margin: 8px 0;
+    font-size: 1.25rem;
+}
+
+.meal-card p {
+    color: #5e6d65;
+}
+
+.meal-information {
+    display: flex;
+    justify-content: space-between;
+
+    margin-top: 24px;
+    color: #5e6d65;
+}
+
+.meal-information strong {
+    color: #176b52;
+}
+
+/* How it works */
+
+.steps-section {
+    max-width: none;
+    background-color: #ffffff;
+}
+
+.steps-section, .section-heading,
+.steps-grid {
+    max-width: 1152px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.step span {
+    display: flex;
+    width: 42px;
+    height: 42px;
+
+    align-items: center;
+    justify-content: center;
+
+    background-color: #176b52;
+    border-radius: 50%;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.step h3 {
+    margin-bottom: 4px;
+}
+
+.step p {
+    margin-top: 0;
+    color: #5e6d65;
+}
+
+.site-footer {
+    padding: 30px 24px;
+
+    background-color: #123f32;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Smaller screens */
+
+@media (max-width: 750px) {
+    .navbar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .hero {
+        min-height: auto;
+        padding-top: 65px;
+        padding-bottom: 65px;
+    }
+
+    .hero h1 {
+        font-size: 2.7rem;
+    }
+
+    .meal-grid,
+    .steps-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Meal catalogue */
+
+.page-heading {
+    padding: 70px 24px 45px;
+    background-color: #eaf5ef;
+    text-align: center;
+}
+
+.page-heading h1 {
+    max-width: 750px;
+    margin: 0 auto 16px;
+    font-size: 3rem;
+    line-height: 1.15;
+}
+
+.page-heading > p:last-child {
+    max-width: 620px;
+    margin: 0 auto;
+    color: #5e6d65;
+}
+
+.catalogue-section {
+    max-width: 1200px;
+    min-height: 500px;
+    margin: 0 auto;
+    padding: 60px 24px;
+}
+
+.catalogue-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.catalogue-heading h2,
+.catalogue-heading p {
+    margin: 0;
+}
+
+.catalogue-heading p {
+    color: #5e6d65;
+}
+
+@media (max-width: 750px) {
+    .page-heading h1 {
+        font-size: 2.3rem;
+    }
+
+    .catalogue-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+    }
+}
