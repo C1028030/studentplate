@@ -1,0 +1,60 @@
+{% extends "meals/base.html" %}
+
+{% block title %}
+    {{ meal.name }} | StudentPlate
+{% endblock %}
+
+{% block content %}
+    <section class="meal-detail">
+        <a href="{% url 'meal_list' %}" class="back-link">
+            ← Back to all meals
+        </a>
+
+        <div class="meal-detail-header">
+            <div>
+                <p class="eyebrow">{{ meal.category }}</p>
+
+                <h1>{{ meal.name }}</h1>
+
+                <p class="meal-detail-description">
+                    {{ meal.description }}
+                </p>
+            </div>
+
+            <div class="price-panel">
+                <span>Estimated cost per serving</span>
+                
+                <strong>
+                    £{{ meal.price|floatformat:2 }}
+                </strong>
+            </div>
+        </div>
+
+        <!-- Summary information -->
+        <div class="nutrition-grid">
+            <article class="nutrition-item">
+                <strong>{{ meal.prep_time }}</strong>
+                <span>Minutes</span>
+            </article>
+
+            <article class="nutrition-item">
+                <strong>{{ meal.calories }}</strong>
+                <span>Calories</span>
+            </article>
+
+            <article class="nutrition-item">
+                <strong>{{ meal.protein }}</strong>
+                <span>Protein</span>
+            </article>
+        </div>
+
+        <!-- Ingredients entered on separate lines in Admin -->
+        <section class="ingredients-section">
+            <h2>Ingredients</h2>
+
+            <div class="ingredients-list">
+                {{ meal.ingredients|linebreaksbr }}
+            </div>
+        </section>
+    </section>
+{% endblock %}

@@ -328,3 +328,125 @@ a {
         gap: 6px;
     }
 }
+
+/* Catalogue card links */
+.meal-link {
+    display: inline-block;
+    margin-top: 22px;
+    color: #176b52;
+    font-weight: bold;
+}
+
+.meal-card h3 a:hover,
+.meal-link:hover {
+    color: #0e4f3c;
+}
+
+/* Meal detail page */
+
+.meal-detail {
+    max-width: 1000px;
+    min-height: 600px;
+    margin: 0 auto;
+    padding: 60px 24px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 35px;
+    color: #176b52;
+    font-weight: bold;
+}
+
+.meal-detail-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.meal-detail-header h1 {
+    margin: 8px 0 18px;
+    font-size: 3.2rem;
+    line-height: 1.1;
+}
+
+.meal-detail-description {
+    color: #5e6d65;
+    font-size: 1.1rem;
+}
+
+.price-panel {
+    padding: 28px;
+    background-color: #176b52;
+    border-radius: 14px;
+    color: #ffffff;
+}
+
+.price-panel span {
+    display: block;
+    font-size: 0.9rem;
+}
+
+.price-panel strong {
+    display: block;
+    margin-top: 8px;
+    font-size: 2.5rem;
+}
+
+.nutrition-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 50px 0;
+}
+
+.nutrition-item {
+    padding: 22px;
+    background-color: #ffffff;
+    border: 1px solid #dfe7e2;
+    border-radius: 12px;
+}
+
+.nutrition-item strong,
+.nutrition-item span {
+    display: block;
+}
+
+.nutrition-item strong {
+    color: #176b52;
+    font-size: 1.7rem;
+}
+
+.nutrition-item span {
+    color: #5e6d65;
+}
+
+.ingredients-section {
+    padding: 30px;
+    background-color: #eaf5ef;
+    border-radius: 14px;
+}
+
+.ingredients-section h2 {
+    margin-top: 0;
+}
+
+.ingredients-list {
+    color: #405048;
+    line-height: 2;
+}
+
+@media (max-width: 750px) {
+    .meal-detail-header {
+        grid-template-columns: 1fr;
+    }
+
+    .meal-detail-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .nutrition-grid {
+        grid-template-columns: 1fr;
+    }
+}

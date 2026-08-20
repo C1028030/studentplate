@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render 
 from .models import Meal
 
 
@@ -19,3 +19,17 @@ def meal_list(request):
     }
 
     return render(request, "meals/meal_list.html", context)
+
+# Displays complete information for one meal
+def meal_detail(request, meal_id):
+    meal = get_object_or_404(
+        Meal,
+        id=meal_id,
+        is_available=True,
+    )
+
+    context = {
+        "meal": meal,
+    }
+
+    return render(request, "meals/meal_detail.html", context)

@@ -35,13 +35,20 @@
                         {{ meal.category }}
                     </p>
 
-                    <h3>{{ meal.name }}</h3>
+                    <h3>
+                        <a href="{% url 'meal_detail' meal.id %}">
+                            {{ meal.name }}
+                        </a>
+                    </h3>
 
                     <p>{{ meal.description }}</p>
 
                     <div class="meal-information">
                         <strong>£{{ meal.price|floatformat:2 }}</strong>
                         <span>{{ meal.prep_time }} minutes</span>
+                        <a class="meal-link" href="{% url 'meal_detail' meal.id %}">
+                            View meal details →
+                        </a>
                     </div>
                 </div>
             </article>

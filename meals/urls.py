@@ -7,4 +7,11 @@ urlpatterns = [
 
     # Displays the complete meal catalogue
     path("meals/", views.meal_list, name="meal_list"),
+
+    # The meal ID identifies which meal should be displayed
+    path(
+        "meals/<int:meal_id>/",
+        views.meal_detail,
+        name="meal_detail",
+    ),
 ]
