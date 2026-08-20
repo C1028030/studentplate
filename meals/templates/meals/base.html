@@ -16,7 +16,7 @@
             <ul class="nav-links">
                 <li><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'meal_list' %}">Find Meals</a></li>
-                <li><a href="#">My Budget</a></li>
+                <li><a href="{% url 'budget' %}">My Budget</a></li>
             </ul>
         </nav>
     </header>
@@ -31,5 +31,9 @@
     <footer class="site-footer">
         <p>StudentPlate prototype for Sheffield Hallam students.</p>
     </footer>
+
+    <!-- Individual pages can load their own JavaScript -->
+    {% block extra_js %}
+    {% endblock %}
 </body>
 </html>

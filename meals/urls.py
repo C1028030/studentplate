@@ -14,4 +14,7 @@ urlpatterns = [
         views.meal_detail,
         name="meal_detail",
     ),
+
+    # Budget page
+    path("budget/", views.budget, name="budget"),
 ]

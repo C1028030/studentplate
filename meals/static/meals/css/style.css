@@ -450,3 +450,139 @@ a {
         grid-template-columns: 1fr;
     }
 }
+
+/* Budget calculator */
+
+.budget-page {
+    max-width: 1000px;
+    min-height: 650px;
+    margin: 0 auto;
+    padding: 70px 24px;
+}
+
+.budget-heading {
+    max-width: 700px;
+    margin-bottom: 40px;
+}
+
+.budget-heading h1 {
+    margin: 8px 0 18px;
+    font-size: 3.2rem;
+    line-height: 1.1;
+}
+
+.budget-heading > p:last-child {
+    color: #5e6d65;
+    font-size: 1.1rem;
+}
+
+.budget-calculator {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.budget-input-panel,
+.budget-result-panel {
+    padding: 32px;
+    border-radius: 14px;
+}
+
+.budget-input-panel {
+    background-color: #ffffff;
+    border: 1px solid #dfe7e2;
+}
+
+.budget-input-panel label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.currency-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    border: 1px solid #bdcbc3;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.currency-input span {
+    padding: 12px 0 12px 14px;
+    color: #176b52;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.currency-input input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    outline: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+#budget-slider {
+    width: 100%;
+    accent-color: #176b52;
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    color: #5e6d65;
+    font-size: 0.5rem;
+}
+
+.budget-result-panel {
+    background-color: #176b52;
+    color: #ffffff;
+}
+
+.budget-result-panel > p:first-child {
+    margin-top: 0;
+}
+
+.budget-result-panel strong {
+    display: block;
+    margin: 10px 0;
+    font-size: 3.2rem;
+}
+
+.budget-result-panel > p {
+    max-width: 400px;
+}
+
+.budget-button {
+    margin-top: 15px;
+    background-color: #ffffff;
+    color: #176b52;
+}
+
+.budget-note {
+    margin-top: 25px;
+    padding: 24px;
+    background-color: #eaf5ef;
+    border-radius: 14px;
+}
+
+.budget-note h2 {
+    margin-top: 0;
+}
+
+.budget-note p {
+    margin-bottom: 0;
+    color: #405048;
+}
+
+@media (max-width: 750px) {
+    .budget-heading h1 {
+        font-size: 2.5rem;
+    }
+
+    .budget-calculator {
+        grid-template-columns: 1fr;
+    }
+}

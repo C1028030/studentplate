@@ -33,3 +33,7 @@ def meal_detail(request, meal_id):
     }
 
     return render(request, "meals/meal_detail.html", context)
+
+# Displays the weekly budget calculator
+def budget(request):
+    return render(request, "meals/budget.html")

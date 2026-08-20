@@ -1,0 +1,90 @@
+{% extends "meals/base.html" %}
+{% load static %}
+
+{% block title %}
+    My Budget | StudentPlate
+{% endblock %}
+
+{% block content %}
+    <section class="budget-page">
+        <div class="budget-heading">
+            <p class="eyebrow">Weekly budget</p>
+
+            <h1>Plan what you can afford to spend</h1>
+
+            <p>
+                Enter your weekly food budget to calculate an approximate
+                daily allowance.
+            </p>
+        </div>
+
+        <div class="budget-calculator">
+            <!-- User input -->
+             <div class="budget-input-panel">
+                <label for="weekly-budget">
+                    Weekly food budget
+                </label>
+
+                <div class="currency-input">
+                    <span>£</span>
+
+                    <input
+                        id="weekly-budget"
+                        type="number"
+                        min="1"
+                        max="500"
+                        step="1"
+                        value="25"
+                    >
+                </div>
+
+                <input
+                id="budget-slider"
+                type="range"
+                min="5"
+                max="100"
+                step="1"
+                value="25"
+                >
+
+                <div class="slider-labels">
+                    <span>£5</span>
+                    <span>£100</span>
+                </div>
+             </div>
+
+             <!-- Calculated result -->
+            <div class="budget-result-panel">
+                <p>Approximate daily allowance</p>
+
+                <strong id="daily-budget">£3.57</strong>
+
+                <p>
+                    Based on dividing your weekly budget equally across
+                    seven days.
+                </p>
+
+                <a
+                    class="button budget-button"
+                    href="{% url 'meal_list' %}"
+                >
+                Find affordable meals
+                </a>
+            </div>
+        </div>
+
+        <aside class="budget-note">
+            <h2>Remember</h2>
+
+            <p>
+                Meal prices are estimates and may vary between shops.
+                StudentPlate is intended to support planning rather than
+                guarantee exact spending
+            </p>
+        </aside>
+    </section>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'meals/js/budget.js' %}"></script>
+{% endblock %}
