@@ -18,13 +18,45 @@
 
     <!--- Meal catalogue --->
     <section class="catalogue-section">
-        <div class="catalogue-heading">
-            <h2>Available meals</h2>
+        <!-- Meal search -->
+         <form method="get" class="meal-search-form">
+            <div class="search-field">
+                <label for="meal-search">Search meals</label>
 
-            <p>
-                {{ meals|length }}
-                meal{{ meals|length|pluralize }} found
-            </p>
+                <input
+                    id="meal-search"
+                    type="search"
+                    name="q"
+                    value="{{ query }}"
+                    placeholder="Try pasta, chicken or breakfast"
+                >
+            </div>
+
+            <button class="button primary-button" type="submit">
+                Search
+            </button>
+
+            {% if query %}
+                <a href="{% url 'meal_list' %}" class="clear-search">
+                    Clear search
+                </a>
+            {% endif %}
+         </form>
+        <div class="catalogue-heading">
+            <div>
+                <h2>
+                    {% if query %}
+                        Results for "{{ query }}"
+                    {% else %}
+                        Available meals
+                    {% endif %}
+                </h2>
+
+                <p>
+                    {{ meals|length }}
+                    meal{{ meals|length|pluralize }} found
+                </p>
+            </div>
         </div>
 
         <div class="meal-grid">
@@ -53,7 +85,17 @@
                 </div>
             </article>
         {% empty %}
-            <p>No meals are currently available</p>
+            <div class="empty-results">
+                <h3>No matching meals found</h3>
+
+                <p>
+                    Try a different search or return to the complete catalogue
+                </p>
+
+                <a href="{% url 'meal_list' %}" class="button primary-button">
+                    View all meals
+                </a>
+            </div>
         {% endfor %}
         </div>
     </section>

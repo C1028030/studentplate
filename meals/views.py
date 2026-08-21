@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, render 
 from .models import Meal
 
@@ -9,13 +10,25 @@ def home(request):
 
 # Displays the meals stored in the database
 def meal_list(request):
-    # Retrieve available meals and order them from cheapest to most expensive
-    meals = Meal.objects.filter(
-        is_available=True
-    ).order_by("price")
+    # Read the search query from the page URL
+    query = request.GET.get("q", "").strip()
+
+    # Begin with every available meal
+    meals = Meal.objects.filter(is_available=True)
+
+    # Search the name and description when a query is provided
+    if query:
+        meals = meals.filter(
+            Q(name__icontains=query)
+            | Q(description__icontains=query)
+        )
+
+    # Display the cheapest meals first
+    meals = meals.order_by("price")
 
     context = {
         "meals": meals,
+        "query": query,
     }
 
     return render(request, "meals/meal_list.html", context)
