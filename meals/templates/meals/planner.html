@@ -19,6 +19,80 @@
         </div>
 
         {% if planner_entries %}
+            <!-- Planner Summary-->
+            <section class="planner-summary">
+                <article class="summary-card">
+                    <span>Estimated cost</span>
+
+                    <strong>
+                        £{{ total_cost|floatformat:2 }}
+                    </strong>
+                </article>
+
+                <article class="summary-card">
+                    <span>Total calories</span>
+
+                    <strong>
+                        {{ total_calories }}
+                    </strong>
+                </article>
+
+                <article class="summary-card">
+                    <span>Total protein</span>
+
+                    <strong>
+                        {{ total_protein }}g
+                    </strong>
+                </article>
+            </section>
+
+            <!-- Budget comparison -->
+            {% if has_budget %}
+                <section class="budget-comparison {% if is_over_budget %}over-budget{% else %}within-budget{% endif %}">
+                    <div>
+                        <span>Saved weekly budget</span>
+
+                        <strong>
+                            £{{ weekly_budget|floatformat:2 }}
+                        </strong>
+                    </div>
+
+                    <div>
+                        {% if is_over_budget %}
+                            <span>Amount over budget</span>
+
+                            <strong>
+                                £{{ amount_over_budget|floatformat:2 }}
+                            </strong>
+                        {% else %}
+                            <span>Remaining budget</span>
+
+                            <strong>
+                                £{{ remaining_budget|floatformat:2 }}
+                            </strong>
+                        {% endif %}
+                    </div>
+
+                    <a href="{% url 'budget' %}">
+                        Change budget
+                    </a>
+                </section>
+            {% else %}
+                <section class="no-budget-message">
+                    <div>
+                        <h2>No weekly budget saved</h2>
+
+                        <p>
+                            Save a budget to see whether your meal plan is affordable
+                        </p>
+                    </div>
+
+                    <a href="{% url 'budget' %}" class="button primary-button">
+                        Set a budget
+                    </a>
+                </section>
+            {% endif %}
+            
             <div class="planner-list">
                 {% for entry in planner_entries %}
                     <article class="planner-entry">

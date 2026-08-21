@@ -911,3 +911,123 @@ a {
         width: 100%;
     }
 }
+
+/* Planner totals */
+
+.planner-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.summary-card {
+    padding: 22px;
+
+    background-color: #ffffff;
+    border: 1px solid #dfe7e2;
+    border-radius: 12px;
+}
+
+.summary-card span,
+.summary-card strong {
+    display: block;
+}
+
+.summary-card span {
+    color: #5e6d65;
+    font-size: 0.9rem;
+}
+
+.summary-card strong {
+    margin-top: 5px;
+    color: #176b52;
+    font-size: 1.7rem;
+}
+
+/* Budget comparison */
+
+.budget-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 25px;
+    align-items: center;
+
+    margin-bottom: 30px;
+    padding: 24px;
+
+    border-radius: 12px;
+}
+
+.budget-comparison div span,
+.budget-comparison div strong {
+    display: block;
+}
+
+.budget-comparison div span {
+    font-size: 0.85rem;
+}
+
+.budget-comparison div strong {
+    margin-top: 4px;
+    font-size: 1.4rem;
+}
+
+.budget-comparison a {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.budget-comparison.within-budget {
+    background-color: #dff3e7;
+    border: 1px solid #91cbaa;
+    color: #125b37;
+}
+
+.budget-comparison.over-budget {
+    background-color: #fbe7e7;
+    border: 1px solid #dfa2a2;
+    color: #8e2525;
+}
+
+.budget-comparison.over-budget strong {
+    color: #8e2525;
+}
+
+.no-budget-message {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+
+    margin-bottom: 30px;
+    padding: 24px;
+
+    background-color: #fff5dc;
+    border: 1px solid #e3c87b;
+    border-radius: 12px;
+}
+
+.no-budget-message h2 {
+    margin: 0 0 5px;
+    font-size: 1.2rem;
+}
+
+.no-budget-message p {
+    margin: 0;
+}
+
+@media (max_width: 750px) {
+    .planner-summary {
+    grid-template-columns: 1fr;
+    }
+
+    .budget-comparison {
+        grid-template-columns: 1fr;
+    }
+
+    .no-budget-message {
+        align-items: stretch;
+        flex-direction: column;
+    }
+}

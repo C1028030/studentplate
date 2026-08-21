@@ -150,70 +150,120 @@ def budget(request):
     return render(request, "meals/budget.html", context)
 
 # Displays the meals saved in the weekly planner
+# Displays the weekly planner and its calculated totals
 def planner(request):
-    saved_entries = request.session.get(
-        "planner_entries",
+    # Retrieve the stored meal/day entries
+    stored_entries = request.session.get(
+        "meal_planner",
         [],
     )
 
-    # Retrieve the relevant meals in one database query
     meal_ids = [
         entry["meal_id"]
-        for entry in saved_entries
+        for entry in stored_entries
     ]
 
-    meals = Meal.objects.filter(
+    available_meals = Meal.objects.filter(
         id__in=meal_ids,
         is_available=True,
     )
 
-    # Create a dictionary so meals can be found by their IDs
-    meal_lookup = {
+    # Make each meal accessible through its database ID
+    meals_by_id = {
         meal.id: meal
-        for meal in meals
+        for meal in available_meals
     }
 
     planner_entries = []
 
-    # Combine each saved day with its complete meal record
-    for entry in saved_entries:
-        meal = meal_lookup.get(entry["meal_id"])
+    for entry in stored_entries:
+        meal = meals_by_id.get(entry["meal_id"])
 
         if meal:
             planner_entries.append(
                 {
-                    "day": entry["day"],
                     "meal": meal,
+                    "day": entry["day"],
                 }
             )
 
-    # Display entries in weekday order
+    # Display meals in weekday order
     planner_entries.sort(
         key=lambda entry: DAYS_OF_WEEK.index(entry["day"])
     )
 
+    # Calculate the totals for all planned meals
+    total_cost = sum(
+        (
+            entry["meal"].price
+            for entry in planner_entries
+        ),
+        Decimal("0.00"),
+    )
+
+    total_calories = sum(
+        entry["meal"].calories
+        for entry in planner_entries
+    )
+
+    total_protein = sum(
+        entry["meal"].protein
+        for entry in planner_entries
+    )
+
+    # Retrieve the saved budget, if one exists
+    saved_budget = request.session.get("weekly_budget")
+
+    has_budget = False
+    weekly_budget = Decimal("0.00")
+    remaining_budget = Decimal("0.00")
+    amount_over_budget = Decimal("0.00")
+    is_over_budget = False
+
+    if saved_budget:
+        try:
+            weekly_budget = Decimal(saved_budget)
+            has_budget = True
+
+            remaining_budget = weekly_budget - total_cost
+
+            if remaining_budget < 0:
+                is_over_budget = True
+                amount_over_budget = abs(remaining_budget)
+
+        except InvalidOperation:
+            # Ignore an invalid session value
+            has_budget = False
+
     context = {
         "planner_entries": planner_entries,
+        "total_cost": total_cost,
+        "total_calories": total_calories,
+        "total_protein": total_protein,
+        "has_budget": has_budget,
+        "weekly_budget": weekly_budget,
+        "remaining_budget": remaining_budget,
+        "amount_over_budget": amount_over_budget,
+        "is_over_budget": is_over_budget,
     }
 
     return render(request, "meals/planner.html", context)
 
 
-# Adds a meal to a selected day
+# Adds a selected meal and day to the planner
 def add_to_planner(request, meal_id):
-    if request.method == "POST":
-        meal = get_object_or_404(
-            Meal,
-            id=meal_id,
-            is_available=True,
-        )
+    meal = get_object_or_404(
+        Meal,
+        id=meal_id,
+        is_available=True,
+    )
 
+    if request.method == "POST":
         selected_day = request.POST.get("day", "")
 
-        # Only accept one of the recognised weekday values
         if selected_day in DAYS_OF_WEEK:
             planner_entries = request.session.get(
-                "planner_entries",
+                "meal_planner",
                 [],
             )
 
@@ -222,33 +272,36 @@ def add_to_planner(request, meal_id):
                 "day": selected_day,
             }
 
-            # Prevent the same meal being added twice to the same day
             if new_entry not in planner_entries:
                 planner_entries.append(new_entry)
-                request.session["planner_entries"] = planner_entries
+
+                # Save the updated list into the session
+                request.session["meal_planner"] = planner_entries
                 request.session.modified = True
 
     return redirect("planner")
 
-
-# Removes one meal from one day
+# Removes one meal/day entry from the planner
 def remove_from_planner(request, meal_id):
     if request.method == "POST":
         selected_day = request.POST.get("day", "")
 
         planner_entries = request.session.get(
-            "planner_entries",
+            "meal_planner",
             [],
         )
 
-        entry_to_remove = {
-            "meal_id": meal_id,
-            "day": selected_day,
-        }
+        # Keep every entry except the selected meal/day combination
+        updated_entries = [
+            entry
+            for entry in planner_entries
+            if not (
+                entry.get("meal_id") == meal_id
+                and entry.get("day") == selected_day
+            )
+        ]
 
-        if entry_to_remove in planner_entries:
-            planner_entries.remove(entry_to_remove)
-            request.session["planner_entries"] = planner_entries
-            request.session.modified = True
+        request.session["meal_planner"] = updated_entries
+        request.session.modified = True
 
     return redirect("planner")
