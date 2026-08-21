@@ -1,0 +1,89 @@
+{% extends "meals/base.html" %}
+
+
+{% block title %}
+    Weekly Planner | StudentPlate
+{% endblock %}
+
+
+{% block content %}
+    <section class="planner-page">
+        <div class="planner-heading">
+            <p class="eyebrow">Weekly meal plan</p>
+
+            <h1>Your planned meals</h1>
+
+            <p>
+                Organise affordable meals across your week.
+            </p>
+        </div>
+
+        {% if planner_entries %}
+            <div class="planner-list">
+                {% for entry in planner_entries %}
+                    <article class="planner-entry">
+                        <div class="planner-day">
+                            {{ entry.day }}
+                        </div>
+
+                        <div class="planner-meal">
+                            <h2>
+                                <a
+                                    href="{% url 'meal_detail' entry.meal.id %}"
+                                >
+                                    {{ entry.meal.name }}
+                                </a>
+                            </h2>
+
+                            <p>
+                                {{ entry.meal.prep_time }} minutes ·
+                                {{ entry.meal.calories }} calories ·
+                                {{ entry.meal.protein }}g protein
+                            </p>
+                        </div>
+
+                        <strong class="planner-price">
+                            £{{ entry.meal.price|floatformat:2 }}
+                        </strong>
+
+                        <form
+                            method="post"
+                            action="{% url 'remove_from_planner' entry.meal.id %}"
+                        >
+                            {% csrf_token %}
+
+                            <input
+                                type="hidden"
+                                name="day"
+                                value="{{ entry.day }}"
+                            >
+
+                            <button
+                                class="remove-planner-button"
+                                type="submit"
+                            >
+                                Remove
+                            </button>
+                        </form>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-planner">
+                <h2>Your planner is empty</h2>
+
+                <p>
+                    Explore the meal catalogue and add meals to different
+                    days of your week.
+                </p>
+
+                <a
+                    class="button primary-button"
+                    href="{% url 'meal_list' %}"
+                >
+                    Find meals
+                </a>
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}

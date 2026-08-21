@@ -1,8 +1,18 @@
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, render 
+from django.shortcuts import get_object_or_404, redirect, render 
 from .models import Meal
 from decimal import Decimal, InvalidOperation
 
+# Days available in weekly planner
+DAYS_OF_WEEK = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday,"
+]
 
 # Displays the homepage
 def home(request):
@@ -85,6 +95,7 @@ def meal_detail(request, meal_id):
 
     context = {
         "meal": meal,
+        "days_of_week": DAYS_OF_WEEK,
     }
 
     return render(request, "meals/meal_detail.html", context)
@@ -137,3 +148,107 @@ def budget(request):
     }
 
     return render(request, "meals/budget.html", context)
+
+# Displays the meals saved in the weekly planner
+def planner(request):
+    saved_entries = request.session.get(
+        "planner_entries",
+        [],
+    )
+
+    # Retrieve the relevant meals in one database query
+    meal_ids = [
+        entry["meal_id"]
+        for entry in saved_entries
+    ]
+
+    meals = Meal.objects.filter(
+        id__in=meal_ids,
+        is_available=True,
+    )
+
+    # Create a dictionary so meals can be found by their IDs
+    meal_lookup = {
+        meal.id: meal
+        for meal in meals
+    }
+
+    planner_entries = []
+
+    # Combine each saved day with its complete meal record
+    for entry in saved_entries:
+        meal = meal_lookup.get(entry["meal_id"])
+
+        if meal:
+            planner_entries.append(
+                {
+                    "day": entry["day"],
+                    "meal": meal,
+                }
+            )
+
+    # Display entries in weekday order
+    planner_entries.sort(
+        key=lambda entry: DAYS_OF_WEEK.index(entry["day"])
+    )
+
+    context = {
+        "planner_entries": planner_entries,
+    }
+
+    return render(request, "meals/planner.html", context)
+
+
+# Adds a meal to a selected day
+def add_to_planner(request, meal_id):
+    if request.method == "POST":
+        meal = get_object_or_404(
+            Meal,
+            id=meal_id,
+            is_available=True,
+        )
+
+        selected_day = request.POST.get("day", "")
+
+        # Only accept one of the recognised weekday values
+        if selected_day in DAYS_OF_WEEK:
+            planner_entries = request.session.get(
+                "planner_entries",
+                [],
+            )
+
+            new_entry = {
+                "meal_id": meal.id,
+                "day": selected_day,
+            }
+
+            # Prevent the same meal being added twice to the same day
+            if new_entry not in planner_entries:
+                planner_entries.append(new_entry)
+                request.session["planner_entries"] = planner_entries
+                request.session.modified = True
+
+    return redirect("planner")
+
+
+# Removes one meal from one day
+def remove_from_planner(request, meal_id):
+    if request.method == "POST":
+        selected_day = request.POST.get("day", "")
+
+        planner_entries = request.session.get(
+            "planner_entries",
+            [],
+        )
+
+        entry_to_remove = {
+            "meal_id": meal_id,
+            "day": selected_day,
+        }
+
+        if entry_to_remove in planner_entries:
+            planner_entries.remove(entry_to_remove)
+            request.session["planner_entries"] = planner_entries
+            request.session.modified = True
+
+    return redirect("planner")

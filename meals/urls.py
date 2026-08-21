@@ -17,4 +17,18 @@ urlpatterns = [
 
     # Budget page
     path("budget/", views.budget, name="budget"),
+
+    path("planner/", views.planner, name="planner"),
+
+    path(
+        "planner/add/<int:meal_id>/",
+        views.add_to_planner,
+        name="add_to_planner",
+    ),
+
+    path(
+        "planner/remove/<int:meal_id>/",
+        views.remove_from_planner,
+        name="remove_from_planner",
+    ),
 ]

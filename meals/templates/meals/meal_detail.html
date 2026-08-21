@@ -48,6 +48,40 @@
             </article>
         </div>
 
+        <!-- Add this meal to the weekly planner -->
+        <section class="add-planner-section">
+            <div>
+                <h2>Add to weekly planner</h2>
+
+                <p>
+                    Select which day you would like to prepare this meal.
+                </p>
+            </div>
+
+            <form
+                class="add-planner-form"
+                method="post"
+                action="{% url 'add_to_planner' meal.id %}"
+            >
+                {% csrf_token %}
+
+                <label for="planner-day">Day</label>
+
+                <select id="planner-day" name="day" required>
+                    {% for day in days_of_week %}
+                        <option value="{{ day }}">
+                            {{ day }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <button class="button primary-button" type="submit">
+                    Add to planner
+                </button>
+            </form>
+        </section>
+        <br>
+
         <!-- Ingredients entered on separate lines in Admin -->
         <section class="ingredients-section">
             <h2>Ingredients</h2>
