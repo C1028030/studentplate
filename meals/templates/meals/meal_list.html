@@ -19,34 +19,108 @@
     <!--- Meal catalogue --->
     <section class="catalogue-section">
         <!-- Meal search -->
-         <form method="get" class="meal-search-form">
-            <div class="search-field">
-                <label for="meal-search">Search meals</label>
+        <!-- Meal search and filters -->
+        <form class="meal-filter-form" method="get">
+            <div class="filter-grid">
+                <!-- Search -->
+                <div class="filter-field search-filter">
+                    <label for="meal-search">Search</label>
 
-                <input
-                    id="meal-search"
-                    type="search"
-                    name="q"
-                    value="{{ query }}"
-                    placeholder="Try pasta, chicken or breakfast"
-                >
+                    <input
+                        id="meal-search"
+                        type="search"
+                        name="q"
+                        value="{{ query }}"
+                        placeholder="Try pasta or chicken"
+                    >
+                </div>
+
+                <!-- Category -->
+                <div class="filter-field">
+                    <label for="category-filter">Category</label>
+
+                    <select id="category-filter" name="category">
+                        <option value="">All categories</option>
+
+                        {% for category in categories %}
+                            <option
+                                value="{{ category }}"
+                                {% if category == selected_category %}
+                                    selected
+                                {% endif %}
+                            >
+                                {{ category }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Maximum price -->
+                <div class="filter-field">
+                    <label for="price-filter">Maximum price</label>
+
+                    <input
+                        id="price-filter"
+                        type="number"
+                        name="max_price"
+                        value="{{ maximum_price }}"
+                        min="0"
+                        step="0.01"
+                        placeholder="e.g. 2.00"
+                    >
+                </div>
+
+                <!-- Maximum preparation time -->
+                <div class="filter-field">
+                    <label for="time-filter">Maximum time</label>
+
+                    <select id="time-filter" name="max_time">
+                        <option value="">Any time</option>
+
+                        <option
+                            value="10"
+                            {% if maximum_time == "10" %}selected{% endif %}
+                        >
+                            10 minutes
+                        </option>
+
+                        <option
+                            value="20"
+                            {% if maximum_time == "20" %}selected{% endif %}
+                        >
+                            20 minutes
+                        </option>
+
+                        <option
+                            value="30"
+                            {% if maximum_time == "30" %}selected{% endif %}
+                        >
+                            30 minutes
+                        </option>
+                    </select>
+                </div>
             </div>
 
-            <button class="button primary-button" type="submit">
-                Search
-            </button>
+                <div class="filter-actions">
+                    <button class="button primary-button" type="submit">
+                        Apply filters
+                    </button>
 
-            {% if query %}
-                <a href="{% url 'meal_list' %}" class="clear-search">
-                    Clear search
-                </a>
-            {% endif %}
-         </form>
+                    {% if query or selected_category or maximum_price or maximum_time %}
+                        <a class="clear-search" href="{% url 'meal_list' %}">
+                            Clear all filters
+                        </a>
+                    {% endif %}
+                </div>
+            </form>
+
         <div class="catalogue-heading">
             <div>
                 <h2>
                     {% if query %}
-                        Results for "{{ query }}"
+                        Results for “{{ query }}”
+                    {% elif selected_category or maximum_price or maximum_time %}
+                        Filtered meals
                     {% else %}
                         Available meals
                     {% endif %}
