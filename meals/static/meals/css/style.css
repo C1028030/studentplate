@@ -728,3 +728,27 @@ a {
         text-align: center;
     }
 }
+
+/* Budget saving messages */
+
+.save-budget-button {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.budget-message {
+    margin: 18px 0 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.success-message {
+    background-color: #e2f4e8;
+    color: #125b37;
+}
+
+.error-message {
+    background-color: #fbe7e7;
+    color: #9b2525;
+}

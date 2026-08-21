@@ -38,3 +38,6 @@ budgetSlider.addEventListener("input", function () {
     budgetInput.value = budgetSlider.value;
     updateDailyBudget(budgetSlider.value);
 })
+
+// Display corect daily amount when page first loads
+updateDailyBudget(budgetInput.value);
