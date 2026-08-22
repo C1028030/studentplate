@@ -1331,3 +1331,86 @@ a {
         grid-template-columns: 1fr;
     }
 }
+
+/* Homepage progress */
+
+.home-progress {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 55px 24px 10px;
+}
+
+.home-progress-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.home-progress-heading h2 {
+    margin: 5px 0 0;
+}
+
+.home-progress-heading > a {
+    color: #176b52;
+    font-weight: bold;
+}
+
+.home-progress-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.home-progress-grid article {
+    padding: 22px;
+
+    background-color: #ffffff;
+    border: 1px solid #dfe7e2;
+    border-radius: 12px;
+}
+
+.home-progress-grid span,
+.home-progress-grid strong {
+    display: block;
+}
+
+.home-progress-grid span {
+    color: #5e6d65;
+    font-size: 0.9rem;
+}
+
+.home-progress-grid strong {
+    margin-top: 5px;
+    color: #176b52;
+    font-size: 1.7rem;
+}
+
+.home-progress-grid article > a {
+    display: inline-block;
+    margin-top: 8px;
+    color: #176b52;
+    font-weight: bold;
+}
+
+.home-progress-grid .negative-progress {
+    color: #9b2525;
+}
+
+@media (max-width: 750px) {
+    .home-progress-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .home-progress-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 450px) {
+    .home-progress-grid {
+        grid-template-columns: 1fr;
+    }
+}

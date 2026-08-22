@@ -15,8 +15,94 @@ DAYS_OF_WEEK = [
 ]
 
 # Displays the homepage
+# Displays featured meals and the user's current progress
 def home(request):
-    return render(request, "meals/home.html")
+    # Display the three cheapest available meals
+    featured_meals = Meal.objects.filter(
+        is_available=True,
+    ).order_by("price")[:3]
+
+    # Retrieve the planner entries
+    stored_entries = request.session.get(
+        "meal_planner",
+        [],
+    )
+
+    meal_ids = [
+        entry["meal_id"]
+        for entry in stored_entries
+    ]
+
+    available_planner_meals = Meal.objects.filter(
+        id__in=meal_ids,
+        is_available=True,
+    )
+
+    meals_by_id = {
+        meal.id: meal
+        for meal in available_planner_meals
+    }
+
+    valid_planner_entries = [
+        entry
+        for entry in stored_entries
+        if entry["meal_id"] in meals_by_id
+    ]
+
+    # Each planner entry counts because the same meal
+    # may appear on more than one day
+    planned_cost = sum(
+        (
+            meals_by_id[entry["meal_id"]].price
+            for entry in valid_planner_entries
+        ),
+        Decimal("0.00"),
+    )
+
+    # Count available favourites
+    favourite_ids = request.session.get(
+        "favourite_meals",
+        [],
+    )
+
+    favourite_count = Meal.objects.filter(
+        id__in=favourite_ids,
+        is_available=True,
+    ).count()
+
+    # Retrieve the saved weekly budget
+    saved_budget = request.session.get("weekly_budget")
+
+    has_budget = False
+    weekly_budget = Decimal("0.00")
+    remaining_budget = Decimal("0.00")
+    amount_over_budget = Decimal("0.00")
+    is_over_budget = False
+
+    if saved_budget:
+        try:
+            weekly_budget = Decimal(saved_budget)
+            remaining_budget = weekly_budget - planned_cost
+            has_budget = True
+            is_over_budget = remaining_budget < 0
+            amount_over_budget = abs(remaining_budget)
+
+        except InvalidOperation:
+            has_budget = False
+
+    context = {
+        "featured_meals": featured_meals,
+        "planned_meals": len(valid_planner_entries),
+        "planned_cost": planned_cost,
+        "favourite_count": favourite_count,
+        "has_budget": has_budget,
+        "weekly_budget": weekly_budget,
+        "remaining_budget": remaining_budget,
+        "is_over_budget": is_over_budget,
+        "amount_over_budget": amount_over_budget,
+    }
+
+    return render(request, "meals/home.html", context)
 
 
 # Displays the meals stored in the database

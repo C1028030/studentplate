@@ -25,6 +25,64 @@
         </div>
     </section>
 
+    <!-- Current progress snapshot -->
+    <section class="home-progress">
+        <div class="home-progress-heading">
+            <div>
+                <p class="eyebrow">Your current progress</p>
+                <h2>Continue your weekly plan</h2>
+            </div>
+
+            <a href="{% url 'dashboard' %}">
+                View full progress →
+            </a>
+        </div>
+
+        <div class="home-progress-grid">
+            <article>
+                <span>Planned meals</span>
+                <strong>{{ planned_meals }}</strong>
+            </article>
+
+            <article>
+                <span>Planned cost</span>
+
+                <strong>
+                    £{{ planned_cost|floatformat:2 }}
+                </strong>
+            </article>
+
+            <article>
+                <span>Favourite meals</span>
+                <strong>{{ favourite_count }}</strong>
+            </article>
+
+            <article>
+                {% if has_budget %}
+                    {% if is_over_budget %}
+                        <span>£{{ amount_over_budget|floatformat:2 }}</span>
+
+                        <strong class="negative-progress">
+                            £{{ remaining_budget|floatformat:2 }}
+                        </strong>
+                    {% else %}
+                        <span>Budget remaining</span>
+
+                        <strong>
+                            £{{ remaining_budget|floatformat:2 }}
+                        </strong>
+                    {% endif %}
+                {% else %}
+                    <span>Weekly budget</span>
+
+                    <a href="{% url 'budget' %}">
+                        Set your budget
+                    </a>
+                {% endif %}
+            </article>
+        </div>
+    </section>
+
     <!--- Featured meals --->
     <section class="featured-section">
         <div class="section-heading">
@@ -33,52 +91,48 @@
         </div>
 
         <div class="meal-grid">
-            <article class="meal-card">
-                <div class="meal-card-content">
-                    <p class="meal-category">High Protein</p>
-                    <h3>Chicken and vegetable rice bowl</h3>
-                    <p>
-                        A filling, high-protein meal using affordable
-                        cupboard ingredients.
-                    </p>
+            {% for meal in featured_meals %}
+                <article class="meal-card">
+                    <div class="meal-card-content">
+                        <p class="meal-category">
+                            {{ meal.category }}
+                        </p>
 
-                    <div class="meal-information">
-                        <strong>£2.35</strong>
-                        <span>25 Minutes</span>
+                        <h3>
+                            <a href="{% url 'meal_detail' meal.id %}">
+                                {{ meal.name }}
+                            </a>
+                        </h3>
+
+                        <p>{{ meal.description }}</p>
+
+                        <div class="meal-information">
+                            <strong>
+                                £{{ meal.price|floatformat:2 }}
+                            </strong>
+
+                            <span>
+                                {{ meal.prep_time }} minutes
+                            </span>
+                        </div>
+
+                        <a
+                            class="meal-link"
+                            href="{% url 'meal_detail' meal.id %}"
+                        >
+                            View meal details →
+                        </a>
                     </div>
-                </div>
-            </article>
+                </article>
+            {% empty %}
+                <div class="empty-results">
+                    <h3>No featured meals available</h3>
 
-            <article class="meal-card">
-                <div class="meal-card-content">
-                    <p class="meal-category">Vegetarian</p>
-                    <h3>Spiced chickpea wraps</h3>
                     <p>
-                        A quick vegetarian meal containing protein and fibre.
+                        Meals can be added through Django Admin.
                     </p>
-
-                    <div class="meal-information">
-                        <strong>£1.65</strong>
-                        <span>15 Minutes</span>
-                    </div>
                 </div>
-            </article>
-
-            <article class="meal-card">
-                <div class="meal-card-content">
-                    <p class="meal-category">Under £2</p>
-                    <h3>Tuna tomato pasta</h3>
-                    <p>
-                        A simple student meal that is inexpensive and
-                        easy to prepare.
-                    </p>
-
-                    <div class="meal-information">
-                        <strong>£1.90</strong>
-                        <span>20 Minutes</span>
-                    </div>
-                </div>
-            </article>
+            {% endfor %}
         </div>
     </section>
 
