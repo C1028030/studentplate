@@ -397,3 +397,115 @@ def remove_favourite(request, meal_id):
             return redirect("favourites")
 
     return redirect("meal_detail", meal_id=meal_id)
+
+# Displays a summary of the user's StudentPlate progress
+def dashboard(request):
+    stored_entries = request.session.get(
+        "meal_planner",
+        [],
+    )
+
+    meal_ids = [
+        entry["meal_id"]
+        for entry in stored_entries
+    ]
+
+    available_meals = Meal.objects.filter(
+        id__in=meal_ids,
+        is_available=True,
+    )
+
+    meals_by_id = {
+        meal.id: meal
+        for meal in available_meals
+    }
+
+    valid_entries = []
+
+    for entry in stored_entries:
+        meal = meals_by_id.get(entry["meal_id"])
+
+        if meal:
+            valid_entries.append(
+                {
+                    "meal": meal,
+                    "day": entry["day"],
+                }
+            )
+
+    # Calculate the planner totals
+    total_cost = sum(
+        (
+            entry["meal"].price
+            for entry in valid_entries
+        ),
+        Decimal("0.00"),
+    )
+
+    total_calories = sum(
+        entry["meal"].calories
+        for entry in valid_entries
+    )
+
+    total_protein = sum(
+        entry["meal"].protein
+        for entry in valid_entries
+    )
+
+    # Count the number of different planned days
+    planned_days = len(
+        {
+            entry["day"]
+            for entry in valid_entries
+        }
+    )
+
+    # Count available favourite meals
+    favourite_ids = request.session.get(
+        "favourite_meals",
+        [],
+    )
+
+    favourite_count = Meal.objects.filter(
+        id__in=favourite_ids,
+        is_available=True,
+    ).count()
+
+    # Compare spending against the saved budget
+    saved_budget = request.session.get("weekly_budget")
+
+    has_budget = False
+    weekly_budget = Decimal("0.00")
+    remaining_budget = Decimal("0.00")
+    amount_over_budget = Decimal("0.00")
+    is_over_budget = False
+
+    if saved_budget:
+        try:
+            weekly_budget = Decimal(saved_budget)
+            has_budget = True
+
+            remaining_budget = weekly_budget - total_cost
+
+            if remaining_budget < 0:
+                is_over_budget = True
+                amount_over_budget = abs(remaining_budget)
+
+        except InvalidOperation:
+            has_budget = False
+
+    context = {
+        "planned_meals": len(valid_entries),
+        "planned_days": planned_days,
+        "favourite_count": favourite_count,
+        "total_cost": total_cost,
+        "total_calories": total_calories,
+        "total_protein": total_protein,
+        "has_budget": has_budget,
+        "weekly_budget": weekly_budget,
+        "remaining_budget": remaining_budget,
+        "amount_over_budget": amount_over_budget,
+        "is_over_budget": is_over_budget,
+    }
+
+    return render(request, "meals/dashboard.html", context)
