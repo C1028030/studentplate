@@ -31,4 +31,10 @@ urlpatterns = [
         views.remove_from_planner,
         name="remove_from_planner",
     ),
+
+    path("favourites/", views.favourites, name="favourites"),
+
+    path("favourites/add/<int:meal_id>/", views.add_favourite, name="add_favourite"),
+
+    path("favourites/remove/<int:meal_id>/", views.remove_favourite, name="remove_favourite"),
 ]

@@ -86,6 +86,7 @@ def meal_list(request):
     return render(request, "meals/meal_list.html", context)
 
 # Displays complete information for one meal
+# Displays the complete information for one meal
 def meal_detail(request, meal_id):
     meal = get_object_or_404(
         Meal,
@@ -93,9 +94,17 @@ def meal_detail(request, meal_id):
         is_available=True,
     )
 
+    favourite_ids = request.session.get(
+        "favourite_meals",
+        [],
+    )
+
     context = {
         "meal": meal,
         "days_of_week": DAYS_OF_WEEK,
+
+        # Controls which favourite button is displayed
+        "is_favourite": meal.id in favourite_ids,
     }
 
     return render(request, "meals/meal_detail.html", context)
@@ -305,3 +314,76 @@ def remove_from_planner(request, meal_id):
         request.session.modified = True
 
     return redirect("planner")
+
+# Displays user's saved favourite meals
+def favourites(request):
+    favourite_ids = request.session.get(
+        "favourite_meals",
+        [],
+    )
+
+    available_meals = Meal.objects.filter(
+        id__in=favourite_ids,
+        is_available=True,
+    )
+
+    meals_by_id = {
+        meal.id: meal
+        for meal in available_meals
+    }
+
+    # Preserve the order in which meals were saved
+    favourite_meals = [
+        meals_by_id[meal_id]
+        for meal_id in favourite_ids
+        if meal_id in meals_by_id
+    ]
+
+    context = {
+        "favourite_meals": favourite_meals,
+    }
+
+    return render(request, "meals/favourites.html", context)
+
+
+# Adds one meal to the favourites session
+def add_favourite(request, meal_id):
+    meal = get_object_or_404(
+        Meal,
+        id=meal_id,
+        is_available=True,
+    )
+
+    if request.method == "POST":
+        favourite_ids = request.session.get(
+            "favourite_meals",
+            [],
+        )
+
+        if meal.id not in favourite_ids:
+            favourite_ids.append(meal.id)
+
+            request.session["favourite_meals"] = favourite_ids
+            request.session.modified = True
+
+    return redirect("meal_detail", meal_id=meal.id)
+
+
+# Removes one meal from the favourites session
+def remove_favourite(request, meal_id):
+    if request.method == "POST":
+        favourite_ids = request.session.get(
+            "favourite_meals",
+            [],
+        )
+
+        favourite_ids = [
+            saved_id
+            for saved_id in favourite_ids
+            if saved_id != meal_id
+        ]
+
+        request.session["favourite_meals"] = favourite_ids
+        request.session.modified = True
+
+    return redirect("meal_detail", meal_id=meal_id)

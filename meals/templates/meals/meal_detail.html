@@ -30,6 +30,27 @@
             </div>
         </div>
 
+        <!-- Save or remove meal from favourites -->
+         <div class="favourite-action">
+            {% if is_favourite %}
+                <form method="post" action="{% url 'remove_favourite' meal.id %}">
+                    {% csrf_token %}
+
+                    <button class="favourite-button saved-favourite" type="submit">
+                        ♥ Saved to favourites
+                    </button>
+                </form>
+            {% else %}
+                <form method="post" action="{% url 'add_favourite' meal.id %}">
+                    {% csrf_token %}
+
+                    <button class="favourite-button" type="submit">
+                        ♡ Save to favourites
+                    </button>
+                </form>
+            {% endif %}
+         </div>
+
         <!-- Summary information -->
         <div class="nutrition-grid">
             <article class="nutrition-item">

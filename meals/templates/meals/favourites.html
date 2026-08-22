@@ -1,0 +1,76 @@
+{% extends "meals/base.html" %}
+
+
+{% block title %}
+    Favourites | StudentPlate
+{% endblock %}
+
+
+{% block content %}
+    <section class="favourites-page">
+        <div class="favourites-heading">
+            <p class="eyebrow">Saved meals</p>
+
+            <h1>Your favourite meals</h1>
+
+            <p>
+                Keep useful meals together so they are easy to find later.
+            </p>
+        </div>
+
+        {% if favourite_meals %}
+            <div class="meal-grid">
+                {% for meal in favourite_meals %}
+                    <article class="meal-card">
+                        <div class="meal-card-content">
+                            <p class="meal-category">
+                                {{ meal.category }}
+                            </p>
+
+                            <h2>
+                                <a href="{% url 'meal_detail' meal.id %}">
+                                    {{ meal.name }}
+                                </a>
+                            </h2>
+
+                            <p>{{ meal.description }}</p>
+
+                            <div class="meal-information">
+                                <strong>
+                                    £{{ meal.price|floatformat:2 }}
+                                </strong>
+
+                                <span>
+                                    {{ meal.prep_time }} minutes
+                                </span>
+                            </div>
+
+                            <a
+                                class="meal-link"
+                                href="{% url 'meal_detail' meal.id %}"
+                            >
+                                View meal details →
+                            </a>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-favourites">
+                <h2>No favourite meals yet</h2>
+
+                <p>
+                    Save meals from their detail pages and they will
+                    appear here.
+                </p>
+
+                <a
+                    class="button primary-button"
+                    href="{% url 'meal_list' %}"
+                >
+                    Find meals
+                </a>
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}
