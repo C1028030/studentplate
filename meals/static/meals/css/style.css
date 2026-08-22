@@ -1109,3 +1109,23 @@ a {
         font-size: 2.5rem;
     }
 }
+
+.remove-favourite-form {
+    margin-top: 15px;
+}
+
+.remove-favourite-button {
+    padding: 8px 12px;
+
+    background: none;
+    border: 1px solid #c66a6a;
+    border-radius: 7px;
+
+    color: #9b2525;
+    cursor: pointer;
+    font: inherit;
+}
+
+.remove-favourite-button:hover {
+    background-color: #fbe7e7;
+}

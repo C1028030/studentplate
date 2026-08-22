@@ -35,6 +35,12 @@
             {% if is_favourite %}
                 <form method="post" action="{% url 'remove_favourite' meal.id %}">
                     {% csrf_token %}
+                    
+                    <input
+                        type="hidden"
+                        name="return_page"
+                        value="meal_detail"
+                    >
 
                     <button class="favourite-button saved-favourite" type="submit">
                         ♥ Saved to favourites

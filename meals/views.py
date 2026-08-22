@@ -370,6 +370,7 @@ def add_favourite(request, meal_id):
 
 
 # Removes one meal from the favourites session
+# Removes one meal from the favourites session
 def remove_favourite(request, meal_id):
     if request.method == "POST":
         favourite_ids = request.session.get(
@@ -385,5 +386,14 @@ def remove_favourite(request, meal_id):
 
         request.session["favourite_meals"] = favourite_ids
         request.session.modified = True
+
+        # Decide which page to return to
+        return_page = request.POST.get(
+            "return_page",
+            "meal_detail",
+        )
+
+        if return_page == "favourites":
+            return redirect("favourites")
 
     return redirect("meal_detail", meal_id=meal_id)

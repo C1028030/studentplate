@@ -51,6 +51,27 @@
                             >
                                 View meal details →
                             </a>
+
+                            <form
+                                class="remove-favourite-form"
+                                method="post"
+                                action="{% url 'remove_favourite' meal.id %}"
+                            >
+                                {% csrf_token %}
+
+                                <input
+                                    type="hidden"
+                                    name="return_page"
+                                    value="favourites"
+                                >
+
+                                <button
+                                    class="remove-favourite-button"
+                                    type="submit"
+                                >
+                                    Remove from favourites
+                            </button>
+                        </form>
                         </div>
                     </article>
                 {% endfor %}
