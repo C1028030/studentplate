@@ -5,31 +5,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}StudentPlate{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'meals/css/style.css' %}?v=4">
+    <link rel="stylesheet" href="{% static 'meals/css/style.css' %}?v=5">
 </head>
 <body>
+    <a class="skip-link" href="#main-content">
+        Skip to main content
+    </a>
     <!--- Shared navigation --->
     <header class="site-header">
         <nav class="navbar">
             <a class="logo" href="{% url 'home' %}">StudentPlate</a>
 
             <ul class="nav-links">
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'meal_list' %}">Find Meals</a></li>
-                <li><a href="{% url 'favourites' %}">Favourites</a></li>
                 <li>
-                    <a href="{% url 'planner' %}">
+                    <a
+                        href="{% url 'home' %}"
+                        {% if request.resolver_match.url_name == "home" %}
+                            class="active-nav"
+                            aria-current="page"
+                        {% endif %}
+                    >
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="{% url 'meal_list' %}"
+                        {% if request.resolver_match.url_name == "meal_list" or request.resolver_match.url_name == "meal_detail" %}
+                            class="active-nav"
+                            aria-current="page"
+                        {% endif %}
+                    >
+                        Find Meals
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="{% url 'favourites' %}"
+                        {% if request.resolver_match.url_name == "favourites" %}
+                            class="active-nav"
+                            aria-current="page"
+                        {% endif %}
+                    >
+                        Favourites
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="{% url 'planner' %}"
+                        {% if request.resolver_match.url_name == "planner" %}
+                            class="active-nav"
+                            aria-current="page"
+                        {% endif %}
+                    >
                         Planner
                     </a>
                 </li>
-                <li><a href="{% url 'dashboard' %}">Progress</a></li>
-                <li><a href="{% url 'budget' %}">My Budget</a></li>
+
+                <li>
+                    <a
+                        href="{% url 'dashboard' %}"
+                        {% if request.resolver_match.url_name == "dashboard" %}
+                            class="active-nav"
+                            aria-current="page"
+                        {% endif %}
+                    >
+                        Progress
+                    </a>
+                </li>
+
+                <li>
+                    <a
+                        href="{% url 'budget' %}"
+                        {% if request.resolver_match.url_name == "budget" %}
+                            class="active-nav"
+                            aria-current="page"
+                        {% endif %}
+                    >
+                        My Budget
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>
 
     <!--- Each page inserts its content here --->
-    <main>
+    <main id="main-content">
         {% block content %}
         {% endblock %}
     </main>

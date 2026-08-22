@@ -56,13 +56,13 @@
                 </div>
 
                 {% if budget_saved %}
-                    <p class="budget-message success-message">
+                    <p class="budget-message success-message" role="status">
                         Your weekly budget has been saved.
                     </p>
                 {% endif %}
 
                 {% if budget_error %}
-                    <p class="budget-message error-message">
+                    <p class="budget-message error-message" role="alert">
                         {{ budget_error }}
                     </p>
                 {% endif %}
