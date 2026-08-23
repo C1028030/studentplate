@@ -8,6 +8,7 @@ class MealAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "category",
+        "dietary_type",
         "price",
         "prep_time",
         "is_available",
@@ -16,6 +17,7 @@ class MealAdmin(admin.ModelAdmin):
     # Filters to the side of the admin page
     list_filter = (
         "category",
+        "dietary_type",
         "is_available",
     )
 
