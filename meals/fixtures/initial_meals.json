@@ -1,0 +1,194 @@
+[
+{
+  "model": "meals.meal",
+  "pk": 1,
+  "fields": {
+    "name": "Chicken and vegetable rice bowl",
+    "category": "Main meal",
+    "dietary_type": "standard",
+    "description": "A filling, high-protein meal made with chicken, rice and mixed vegetables.",
+    "price": "2.35",
+    "prep_time": 25,
+    "calories": 610,
+    "protein": 42,
+    "ingredients": "Chicken\r\nRice\r\nMixed Vegetables\r\nSoy sauce\r\nSeasoning",
+    "is_available": true
+  }
+},
+{
+  "model": "meals.meal",
+  "pk": 2,
+  "fields": {
+    "name": "Spiced chickpea wraps",
+    "category": "Lunch",
+    "dietary_type": "vegetarian",
+    "description": "Quick vegetarian wraps containing chickpeas, salad and yoghurt.",
+    "price": "1.65",
+    "prep_time": 15,
+    "calories": 520,
+    "protein": 21,
+    "ingredients": "Chickpeas\r\nSpices (cumin and paprika)\r\nMixed vegetables\r\nSauce (any)",
+    "is_available": true
+  }
+},
+{
+  "model": "meals.meal",
+  "pk": 3,
+  "fields": {
+    "name": "Tuna tomato pasta",
+    "category": "Main meal",
+    "dietary_type": "standard",
+    "description": "An affordable pasta meal containing tuna, tomatoes and mixed herbs.",
+    "price": "1.90",
+    "prep_time": 20,
+    "calories": 570,
+    "protein": 35,
+    "ingredients": "Canned tuna\r\nTomatoes\r\nPasta\r\nOlive oil\r\nSeasoning",
+    "is_available": true
+  }
+},
+{
+  "model": "meals.meal",
+  "pk": 4,
+  "fields": {
+    "name": "Banana overnight oats",
+    "category": "Breakfast",
+    "dietary_type": "vegetarian",
+    "description": "A simple breakfast that can be prepared the night before.",
+    "price": "0.95",
+    "prep_time": 5,
+    "calories": 430,
+    "protein": 18,
+    "ingredients": "Oats\r\nMilk\r\nBanana",
+    "is_available": true
+  }
+},
+{
+  "model": "meals.meal",
+  "pk": 5,
+  "fields": {
+    "name": "Greek yoghurt fruit oats",
+    "category": "Breakfast",
+    "dietary_type": "vegetarian",
+    "description": "A quick breakfast containing oats, Greek yoghurt and fruit.",
+    "price": "1.20",
+    "prep_time": 5,
+    "calories": 390,
+    "protein": 25,
+    "ingredients": "Oats\r\nGreek yoghurt\r\nBanana\r\nFrozen berries\r\nHoney",
+    "is_available": true
+  }
+},
+{
+  "model": "meals.meal",
+  "pk": 6,
+  "fields": {
+    "name": "Lentil and tomato soup",
+    "category": "Lunch",
+    "dietary_type": "vegan",
+    "description": "An affordable warming soup made with lentils, tomatoes and vegetables.",
+    "price": "1.10",
+    "prep_time": 30,
+    "calories": 360,
+    "protein": 20,
+    "ingredients": "Red lentils\r\nChopped tomatoes\r\nCarrot\r\nOnion\r\nVegetable stock\r\nMixed herbs",
+    "is_available": true
+  }
+},
+{
+  "model": "meals.meal",
+  "pk": 7,
+  "fields": {
+    "name": "Peanut tofu noodles",
+    "category": "Main meal",
+    "dietary_type": "vegan",
+    "description": "A plant-based noodle meal with tofu, vegetables and peanut sauce.",
+    "price": "2.20",
+    "prep_time": 20,
+    "calories": 610,
+    "protein": 28,
+    "ingredients": "Noodles\r\nTofu\r\nMixed vegetables\r\nPeanut butter\r\nSoy sauce\r\nLime juice",
+    "is_available": true
+  }
+},
+{
+  "model": "meals.meal",
+  "pk": 8,
+  "fields": {
+    "name": "Egg fried rice",
+    "category": "Main meal",
+    "dietary_type": "vegetarian",
+    "description": "A quick rice dish containing eggs, vegetables and simple seasoning.",
+    "price": "1.55",
+    "prep_time": 15,
+    "calories": 540,
+    "protein": 24,
+    "ingredients": "Rice\r\nEggs\r\nFrozen peas\r\nCarrot\r\nSoy sauce\r\nSpring onion",
+    "is_available": true
+  }
+},
+{
+  "model": "meals.meal",
+  "pk": 9,
+  "fields": {
+    "name": "Chicken fajita wrap",
+    "category": "Lunch",
+    "dietary_type": "standard",
+    "description": "A high-protein wrap containing seasoned chicken and vegetables.",
+    "price": "2.45",
+    "prep_time": 20,
+    "calories": 580,
+    "protein": 40,
+    "ingredients": "Chicken breast\r\nTortilla wrap\r\nMixed peppers\r\nOnion\r\nLettuce\r\nFajita seasoning",
+    "is_available": true
+  }
+},
+{
+  "model": "meals.meal",
+  "pk": 10,
+  "fields": {
+    "name": "Bean chilli jacket potato",
+    "category": "Main meal",
+    "dietary_type": "vegan",
+    "description": "A filling baked potato topped with an affordable mixed-bean chilli.",
+    "price": "1.75",
+    "prep_time": 35,
+    "calories": 620,
+    "protein": 22,
+    "ingredients": "Baking potato\r\nKidney beans\r\nBlack beans\r\nChopped tomatoes\r\nOnion\r\nChilli powder",
+    "is_available": true
+  }
+},
+{
+  "model": "meals.meal",
+  "pk": 11,
+  "fields": {
+    "name": "Turkey couscous bowl",
+    "category": "Main meal",
+    "dietary_type": "standard",
+    "description": "A quick high-protein bowl containing turkey, couscous and vegetables.",
+    "price": "2.60",
+    "prep_time": 15,
+    "calories": 560,
+    "protein": 38,
+    "ingredients": "Turkey mince\r\nCouscous\r\nMixed vegetables\r\nVegetable stock\r\nPaprika\r\nMixed herbs",
+    "is_available": true
+  }
+},
+{
+  "model": "meals.meal",
+  "pk": 12,
+  "fields": {
+    "name": "Cottage cheese jacket potato",
+    "category": "Lunch",
+    "dietary_type": "vegetarian",
+    "description": "A simple jacket potato topped with protein-rich cottage cheese.",
+    "price": "1.40",
+    "prep_time": 12,
+    "calories": 480,
+    "protein": 30,
+    "ingredients": "Baking potato\r\nCottage cheese\r\nSweetcorn\r\nSpring onion\r\nBlack pepper",
+    "is_available": true
+  }
+}
+]
