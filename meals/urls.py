@@ -43,4 +43,10 @@ urlpatterns = [
         views.dashboard,
         name="dashboard",
     ),
+
+    path(
+        "preferences/",
+        views.preferences,
+        name="preferences",
+    )
 ]

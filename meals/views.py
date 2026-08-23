@@ -595,3 +595,120 @@ def dashboard(request):
     }
 
     return render(request, "meals/dashboard.html", context)
+
+# Displays and saves the student's meal preferences
+def preferences(request):
+    # Default values used before preferences are saved
+    saved_preferences = request.session.get(
+        "meal_preferences",
+        {
+            "dietary_type": "any",
+            "maximum_price": "3.00",
+            "maximum_time": "30",
+            "health_goal": "balanced",
+        },
+    )
+
+    preference_saved = False
+    preference_errors = []
+
+    if request.method == "POST":
+        dietary_type = request.POST.get(
+            "dietary_type",
+            "any",
+        )
+
+        maximum_price = request.POST.get(
+            "maximum_price",
+            "",
+        ).strip()
+
+        maximum_time = request.POST.get(
+            "maximum_time",
+            "",
+        ).strip()
+
+        health_goal = request.POST.get(
+            "health_goal",
+            "balanced",
+        )
+
+        # Validate the dietary selection
+        allowed_diets = {
+            "any",
+            "vegetarian",
+            "vegan",
+        }
+
+        if dietary_type not in allowed_diets:
+            preference_errors.append(
+                "Select a valid dietary preference."
+            )
+
+        # Validate the health goal
+        allowed_goals = {
+            "balanced",
+            "high_protein",
+        }
+
+        if health_goal not in allowed_goals:
+            preference_errors.append(
+                "Select a valid health goal."
+            )
+
+        # Validate the maximum price
+        try:
+            price_value = Decimal(maximum_price)
+
+            if not Decimal("0.50") <= price_value <= Decimal("20.00"):
+                preference_errors.append(
+                    "Maximum price must be between £0.50 and £20."
+                )
+
+        except InvalidOperation:
+            preference_errors.append(
+                "Enter a valid maximum meal price."
+            )
+
+        # Validate the preparation time
+        try:
+            time_value = int(maximum_time)
+
+            if not 5 <= time_value <= 120:
+                preference_errors.append(
+                    "Preparation time must be between 5 and 120 minutes."
+                )
+
+        except ValueError:
+            preference_errors.append(
+                "Enter a valid preparation time."
+            )
+
+        # Keep the submitted values visible if validation fails
+        saved_preferences = {
+            "dietary_type": dietary_type,
+            "maximum_price": maximum_price,
+            "maximum_time": maximum_time,
+            "health_goal": health_goal,
+        }
+
+        if not preference_errors:
+            saved_preferences = {
+                "dietary_type": dietary_type,
+                "maximum_price": f"{price_value:.2f}",
+                "maximum_time": str(time_value),
+                "health_goal": health_goal,
+            }
+
+            request.session["meal_preferences"] = saved_preferences
+            request.session.modified = True
+
+            preference_saved = True
+
+    context = {
+        "preferences": saved_preferences,
+        "preference_saved": preference_saved,
+        "preference_errors": preference_errors,
+    }
+
+    return render(request, "meals/preferences.html", context)

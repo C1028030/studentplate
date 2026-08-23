@@ -1,0 +1,221 @@
+{% extends "meals/base.html" %}
+
+
+{% block title %}
+    Meal Preferences | StudentPlate
+{% endblock %}
+
+
+{% block content %}
+    <section class="preferences-page">
+        <div class="preferences-heading">
+            <p class="eyebrow">Personalise your meals</p>
+
+            <h1>What works for you?</h1>
+
+            <p>
+                Tell StudentPlate what matters to you so it can suggest
+                suitable meals.
+            </p>
+        </div>
+
+        {% if preference_saved %}
+            <div class="preference-success" role="status">
+                Your meal preferences have been saved.
+            </div>
+        {% endif %}
+
+        {% if preference_errors %}
+            <div class="preference-errors" role="alert">
+                <h2>Please correct the following:</h2>
+
+                <ul>
+                    {% for error in preference_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <form class="preferences-form" method="post">
+            {% csrf_token %}
+
+            <!-- Dietary preference -->
+            <fieldset class="preference-group">
+                <legend>Dietary preference</legend>
+
+                <p>
+                    Choose the option that best matches your diet.
+                </p>
+
+                <label class="radio-option">
+                    <input
+                        type="radio"
+                        name="dietary_type"
+                        value="any"
+                        {% if preferences.dietary_type == "any" %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <span>
+                        <strong>No preference</strong>
+                        Show all available meals.
+                    </span>
+                </label>
+
+                <label class="radio-option">
+                    <input
+                        type="radio"
+                        name="dietary_type"
+                        value="vegetarian"
+                        {% if preferences.dietary_type == "vegetarian" %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <span>
+                        <strong>Vegetarian</strong>
+                        Show vegetarian and vegan meals.
+                    </span>
+                </label>
+
+                <label class="radio-option">
+                    <input
+                        type="radio"
+                        name="dietary_type"
+                        value="vegan"
+                        {% if preferences.dietary_type == "vegan" %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <span>
+                        <strong>Vegan</strong>
+                        Only show meals classified as vegan.
+                    </span>
+                </label>
+            </fieldset>
+
+            <!-- Price and preparation time -->
+            <div class="preference-row">
+                <div class="preference-field">
+                    <label for="maximum-price">
+                        Maximum price per meal
+                    </label>
+
+                    <div class="currency-input">
+                        <span>£</span>
+
+                        <input
+                            id="maximum-price"
+                            name="maximum_price"
+                            type="number"
+                            min="0.50"
+                            max="20"
+                            step="0.01"
+                            value="{{ preferences.maximum_price }}"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="preference-field">
+                    <label for="maximum-time">
+                        Maximum preparation time
+                    </label>
+
+                    <select
+                        id="maximum-time"
+                        name="maximum_time"
+                        required
+                    >
+                        <option
+                            value="15"
+                            {% if preferences.maximum_time == "15" %}
+                                selected
+                            {% endif %}
+                        >
+                            15 minutes
+                        </option>
+
+                        <option
+                            value="30"
+                            {% if preferences.maximum_time == "30" %}
+                                selected
+                            {% endif %}
+                        >
+                            30 minutes
+                        </option>
+
+                        <option
+                            value="45"
+                            {% if preferences.maximum_time == "45" %}
+                                selected
+                            {% endif %}
+                        >
+                            45 minutes
+                        </option>
+
+                        <option
+                            value="60"
+                            {% if preferences.maximum_time == "60" %}
+                                selected
+                            {% endif %}
+                        >
+                            60 minutes
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Health goal -->
+            <fieldset class="preference-group">
+                <legend>Health goal</legend>
+
+                <p>
+                    Choose how recommendations should be prioritised.
+                </p>
+
+                <label class="radio-option">
+                    <input
+                        type="radio"
+                        name="health_goal"
+                        value="balanced"
+                        {% if preferences.health_goal == "balanced" %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <span>
+                        <strong>Balanced eating</strong>
+                        Prioritise affordable meals that match your choices.
+                    </span>
+                </label>
+
+                <label class="radio-option">
+                    <input
+                        type="radio"
+                        name="health_goal"
+                        value="high_protein"
+                        {% if preferences.health_goal == "high_protein" %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <span>
+                        <strong>Higher protein</strong>
+                        Prioritise meals containing at least 25g protein.
+                    </span>
+                </label>
+            </fieldset>
+
+            <button
+                class="button primary-button preference-submit"
+                type="submit"
+            >
+                Save preferences
+            </button>
+        </form>
+    </section>
+{% endblock %}

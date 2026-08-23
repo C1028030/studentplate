@@ -1471,3 +1471,165 @@ a {
         justify-content: flex-start;
     }
 }
+
+/* Meal preferences */
+
+.preferences-page {
+    max-width: 850px;
+    min-height: 700px;
+    margin: 0 auto;
+    padding: 70px 24px;
+}
+
+.preferences-heading {
+    margin-bottom: 35px;
+}
+
+.preferences-heading h1 {
+    margin: 8px 0 12px;
+    font-size: 3.2rem;
+}
+
+.preferences-heading > p:last-child {
+    color: #5e6d65;
+}
+
+.preferences-form {
+    display: grid;
+    gap: 22px;
+}
+
+.preference-group {
+    margin: 0;
+    padding: 25px;
+
+    background-color: #ffffff;
+    border: 1px solid #dfe7e2;
+    border-radius: 14px;
+}
+
+.preference-group legend {
+    padding: 0 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.preference-group > p {
+    margin-top: 0;
+    color: #5e6d65;
+}
+
+.radio-option {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+
+    margin-top: 12px;
+    padding: 14px;
+
+    border: 1px solid #dfe7e2;
+    border-radius: 9px;
+
+    cursor: pointer;
+}
+
+.radio-option:hover {
+    background-color: #f3f8f5;
+}
+
+.radio-option input {
+    margin-top: 5px;
+    accent-color: #176b52;
+}
+
+.radio-option span,
+.radio-option strong {
+    display: block;
+}
+
+.radio-option span {
+    color: #5e6d65;
+}
+
+.radio-option strong {
+    color: #1d2a24;
+}
+
+.preference-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.preference-field {
+    padding: 22px;
+
+    background-color: #ffffff;
+    border: 1px solid #dfe7e2;
+    border-radius: 14px;
+}
+
+.preference-field > label {
+    display: block;
+    margin-bottom: 9px;
+    font-weight: bold;
+}
+
+.preference-field select {
+    width: 100%;
+    min-height: 46px;
+    padding: 10px 12px;
+
+    background-color: #ffffff;
+    border: 1px solid #bdcbc3;
+    border-radius: 8px;
+
+    font: inherit;
+}
+
+.preference-submit {
+    justify-self: start;
+}
+
+.preference-success,
+.preference-errors {
+    margin-bottom: 22px;
+    padding: 16px;
+
+    border-radius: 10px;
+}
+
+.preference-success {
+    background-color: #dff3e7;
+    border: 1px solid #91cbaa;
+    color: #125b37;
+}
+
+.preference-errors {
+    background-color: #fbe7e7;
+    border: 1px solid #dfa2a2;
+    color: #8e2525;
+}
+
+.preference-errors h2 {
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+.preference-errors ul {
+    margin-bottom: 0;
+}
+
+@media (max-width: 750px) {
+    .preferences-heading h1 {
+        font-size: 2.5rem;
+    }
+
+    .preference-row {
+        grid-template-columns: 1fr;
+    }
+
+    .preference-submit {
+        width: 100%;
+    }
+}
