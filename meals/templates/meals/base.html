@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}StudentPlate{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'meals/css/style.css' %}?v=6">
+    <link rel="stylesheet" href="{% static 'meals/css/style.css' %}?v=7">
 </head>
 <body>
     <a class="skip-link" href="#main-content">
@@ -42,14 +42,14 @@
                 </li>
 
                 <li>
-                    <a 
-                        href="{% url 'preferences' %}"
-                        {% if request.resolver_match.url_name == "preferences" %}
+                    <a
+                        href="{% url 'recommendations' %}"
+                        {% if request.resolver_match.url_name == "recommendations" or request.resolver_match.url_name == "preferences" %}
                             class="active-nav"
                             aria-current="page"
                         {% endif %}
                     >
-                        Preferences
+                        Recommendations
                     </a>
                 </li>
 

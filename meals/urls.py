@@ -48,5 +48,11 @@ urlpatterns = [
         "preferences/",
         views.preferences,
         name="preferences",
-    )
+    ),
+
+    path(
+        "recommendations/",
+        views.recommendations,
+        name="recommendations",
+    ),
 ]

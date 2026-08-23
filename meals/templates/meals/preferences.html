@@ -21,7 +21,11 @@
 
         {% if preference_saved %}
             <div class="preference-success" role="status">
-                Your meal preferences have been saved.
+                <span>Your meal preferences have been saved.</span>
+
+                <a href="{% url 'recommendations' %}">
+                    View recommendations →
+                </a>
             </div>
         {% endif %}
 

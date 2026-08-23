@@ -1,0 +1,176 @@
+{% extends "meals/base.html" %}
+
+
+{% block title %}
+    Recommendations | StudentPlate
+{% endblock %}
+
+
+{% block content %}
+    <section class="recommendations-page">
+        <div class="recommendations-heading">
+            <p class="eyebrow">Chosen for you</p>
+
+            <h1>Your meal recommendations</h1>
+
+            <p>
+                Meals selected using your dietary, price, time and
+                health preferences.
+            </p>
+        </div>
+
+        {% if not has_preferences %}
+            <!-- No saved preferences -->
+            <div class="recommendation-message">
+                <h2>Set your preferences first</h2>
+
+                <p>
+                    Tell StudentPlate what you are looking for before
+                    generating recommendations.
+                </p>
+
+                <a
+                    class="button primary-button"
+                    href="{% url 'preferences' %}"
+                >
+                    Set meal preferences
+                </a>
+            </div>
+
+        {% else %}
+            <!-- Saved preference summary -->
+            <section class="saved-preferences-summary">
+                <div>
+                    <span>Diet</span>
+
+                    <strong>
+                        {% if dietary_type == "vegetarian" %}
+                            Vegetarian
+                        {% elif dietary_type == "vegan" %}
+                            Vegan
+                        {% else %}
+                            No preference
+                        {% endif %}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Maximum price</span>
+
+                    <strong>
+                        £{{ maximum_price|floatformat:2 }}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Maximum time</span>
+
+                    <strong>
+                        {{ maximum_time }} minutes
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Health goal</span>
+
+                    <strong>
+                        {% if health_goal == "high_protein" %}
+                            Higher protein
+                        {% else %}
+                            Balanced eating
+                        {% endif %}
+                    </strong>
+                </div>
+
+                <a href="{% url 'preferences' %}">
+                    Change preferences
+                </a>
+            </section>
+
+            {% if recommendations %}
+                <div class="recommendation-results-heading">
+                    <h2>
+                        {{ recommendations|length }}
+                        matching meal{{ recommendations|length|pluralize }}
+                    </h2>
+                </div>
+
+                <div class="recommendation-grid">
+                    {% for recommendation in recommendations %}
+                        <article class="recommendation-card">
+                            <p class="meal-category">
+                                {{ recommendation.meal.category }}
+                            </p>
+
+                            <h2>
+                                <a
+                                    href="{% url 'meal_detail' recommendation.meal.id %}"
+                                >
+                                    {{ recommendation.meal.name }}
+                                </a>
+                            </h2>
+
+                            <p>
+                                {{ recommendation.meal.description }}
+                            </p>
+
+                            <!-- Explanation of the recommendation -->
+                            <div class="recommendation-reasons">
+                                <h3>Why this matches</h3>
+
+                                <ul>
+                                    {% for reason in recommendation.reasons %}
+                                        <li>{{ reason }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div class="meal-information">
+                                <strong>
+                                    £{{ recommendation.meal.price|floatformat:2 }}
+                                </strong>
+
+                                <span>
+                                    {{ recommendation.meal.prep_time }}
+                                    minutes
+                                </span>
+                            </div>
+
+                            <a
+                                class="button primary-button recommendation-link"
+                                href="{% url 'meal_detail' recommendation.meal.id %}"
+                            >
+                                View meal
+                            </a>
+                        </article>
+                    {% endfor %}
+                </div>
+
+            {% else %}
+                <!-- Preferences produced no matches -->
+                <div class="recommendation-message">
+                    <h2>No exact matches found</h2>
+
+                    <p>
+                        Try increasing your price or preparation-time
+                        limit, or changing your dietary preference.
+                    </p>
+
+                    <a
+                        class="button primary-button"
+                        href="{% url 'preferences' %}"
+                    >
+                        Adjust preferences
+                    </a>
+
+                    <a
+                        class="button secondary-button"
+                        href="{% url 'meal_list' %}"
+                    >
+                        Browse all meals
+                    </a>
+                </div>
+            {% endif %}
+        {% endif %}
+    </section>
+{% endblock %}

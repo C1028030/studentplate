@@ -712,3 +712,136 @@ def preferences(request):
     }
 
     return render(request, "meals/preferences.html", context)
+
+# Displays meals matching the student's saved preferences
+def recommendations(request):
+    saved_preferences = request.session.get(
+        "meal_preferences"
+    )
+
+    # Display a setup message if preferences haven't been saved
+    if not saved_preferences:
+        context = {
+            "has_preferences": False,
+            "recommendations": [],
+        }
+
+        return render(
+            request,
+            "meals/recommendations.html",
+            context,
+        )
+
+    try:
+        maximum_price = Decimal(
+            saved_preferences["maximum_price"]
+        )
+
+        maximum_time = int(
+            saved_preferences["maximum_time"]
+        )
+
+    except (
+        InvalidOperation,
+        ValueError,
+        KeyError,
+    ):
+        context = {
+            "has_preferences": False,
+            "recommendations": [],
+        }
+
+        return render(
+            request,
+            "meals/recommendations.html",
+            context,
+        )
+
+    dietary_type = saved_preferences.get(
+        "dietary_type",
+        "any",
+    )
+
+    health_goal = saved_preferences.get(
+        "health_goal",
+        "balanced",
+    )
+
+    # Start with meals matching the price and time limits
+    matching_meals = Meal.objects.filter(
+        is_available=True,
+        price__lte=maximum_price,
+        prep_time__lte=maximum_time,
+    )
+
+    # Apply the dietary requirement
+    if dietary_type == "vegetarian":
+        matching_meals = matching_meals.filter(
+            dietary_type__in=[
+                "vegetarian",
+                "vegan",
+            ]
+        )
+
+    elif dietary_type == "vegan":
+        matching_meals = matching_meals.filter(
+            dietary_type="vegan"
+        )
+
+    # A higher-protein goal requires at least 25g protein
+    if health_goal == "high_protein":
+        matching_meals = matching_meals.filter(
+            protein__gte=25
+        ).order_by(
+            "-protein",
+            "price",
+        )
+
+    else:
+        # Balanced recommendations prioritise affordability
+        matching_meals = matching_meals.order_by(
+            "price",
+            "-protein",
+        )
+
+    recommendations = []
+
+    for meal in matching_meals:
+        reasons = [
+            f"Costs £{meal.price:.2f}",
+            f"Ready in {meal.prep_time} minutes",
+        ]
+
+        if meal.dietary_type == "vegetarian":
+            reasons.append("Vegetarian")
+
+        elif meal.dietary_type == "vegan":
+            reasons.append("Vegan")
+
+        if meal.protein >= 25:
+            reasons.append(
+                f"{meal.protein}g protein"
+            )
+
+        recommendations.append(
+            {
+                "meal": meal,
+                "reasons": reasons,
+            }
+        )
+
+    context = {
+        "has_preferences": True,
+        "recommendations": recommendations,
+        "preferences": saved_preferences,
+        "maximum_price": maximum_price,
+        "maximum_time": maximum_time,
+        "dietary_type": dietary_type,
+        "health_goal": health_goal,
+    }
+
+    return render(
+        request,
+        "meals/recommendations.html",
+        context,
+    )
