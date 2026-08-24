@@ -9,6 +9,7 @@ class Meal(models.Model):
         ("standard", "No specific diet"),
         ("vegetarian", "Vegetarian"),
         ("vegan", "Vegan"),
+        ("halal", "Halal-compatible"),
     ]
 
     # Basic meal information
@@ -43,6 +44,9 @@ class Meal(models.Model):
 
     # Controls whether the meal appears quickly
     is_available = models.BooleanField(default=True)
+
+    # Halal food
+    is_halal = models.BooleanField(default=True)
 
     def __str__(self):
         # Controls how the meal is labelled in Django admin

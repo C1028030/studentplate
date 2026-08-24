@@ -88,6 +88,22 @@
                     <input
                         type="radio"
                         name="dietary_type"
+                        value="halal"
+                        {% if preferences.dietary_type == "halal" %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <span>
+                        <strong>Halal</strong>
+                        Only show meals classified as Halal-compatible.
+                    </span>
+                </label>
+
+                <label class="radio-option">
+                    <input
+                        type="radio"
+                        name="dietary_type"
                         value="vegan"
                         {% if preferences.dietary_type == "vegan" %}
                             checked

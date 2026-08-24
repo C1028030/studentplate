@@ -12,6 +12,7 @@ StudentPlate was tested throughout development using manual functional, usabilit
 | Balanced recommendations | Affordable meals matching the selected price and time are displayed | Matching meals were returned and ordered by affordability | Pass |
 | Vegetarian preference | Only vegetarian and vegan meals are displayed | Standard meals were excluded while vegetarian and vegan meals remained | Pass |
 | Vegan preference | Only vegan meals are displayed | Only meals classified as vegan were returned | Pass |
+| Halal preference | Only meals marked as Halal-compatible are displayed | Non-Halal meals were excluded and matching meals displayed Halal-compatible as a recommendation reason | Pass |
 | Higher-protein goal | Recommended meals contain at least 25g protein | Meals below 25g protein were excluded | Pass |
 | Maximum price | Meals above the selected price are excluded | All displayed meals were within the maximum price | Pass |
 | Maximum preparation time | Meals exceeding the selected time are excluded | All displayed meals were within the selected preparation time | Pass |
@@ -95,6 +96,10 @@ StudentPlate was tested throughout development using manual functional, usabilit
 | Success messages | Confirmation is visible and accessible | Successful budget and preference saves displayed confirmation | Pass |
 | Mobile layout | Content adapts without horizontal scrolling | Cards and forms stacked at smaller browser widths | Pass |
 | Empty states | Empty pages provide useful next actions | Catalogue, planner, favourites and recommendations provided relevant links | Pass |
+| Healthy-eating sources | Official healthy-eating guidance is clearly linked | Links to the NHS Eat Well guidance and UK Government Eatwell Guide were displayed in the shared footer | Pass |
+| External health links | Health-information links open the correct official pages | Both official sources opened correctly in a new browser tab | Pass |
+| Health-link keyboard focus | Health-information links have visible keyboard focus | Both links displayed a visible yellow outline when reached using Tab | Pass |
+| Health disclaimer | The limitations of the prototype's information are explained | The footer stated that costs and nutrition are estimates and that StudentPlate does not provide medical advice | Pass |
 
 ## Technical testing and issues resolved
 
@@ -110,13 +115,14 @@ Several implementation issues were identified during development:
 - Planner removal logic was rewritten and successfully retested.
 - Conditional budget-status classes were corrected so overspending appeared in red.
 - Browser stylesheet versions were updated to prevent cached CSS from hiding changes.
+- Halal recommendation filtering initially failed because the queryset used a comparison operator instead of an assignment and checked the wrong model field. The filter was corrected to use `is_halal=True` and was successfully retested.
 
 ## Final outcome
 
 The prototype successfully supports the intended core user journey:
 
 1. Set a weekly food budget.
-2. Save dietary, cost, time and health preferences.
+2. Save dietary preferences, including Halal-compatible meals, together with cost, time and health preferences.
 3. Receive personalised meal recommendations.
 4. Search and filter the complete meal catalogue.
 5. View meal cost and nutritional information.
@@ -124,5 +130,6 @@ The prototype successfully supports the intended core user journey:
 7. Add meals to a weekly planner.
 8. Review planned spending and nutritional totals.
 9. Compare planned spending with the saved budget.
+10. Access reliable NHS and UK Government healthy-eating guidance.
 
 All identified functional and interface issues were corrected and retested.

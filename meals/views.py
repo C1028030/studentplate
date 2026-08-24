@@ -638,6 +638,7 @@ def preferences(request):
             "any",
             "vegetarian",
             "vegan",
+            "halal",
         }
 
         if dietary_type not in allowed_diets:
@@ -783,6 +784,11 @@ def recommendations(request):
             ]
         )
 
+    elif dietary_type == "halal":
+        matching_meals == matching_meals.filter(
+            is_halal=True
+        )
+
     elif dietary_type == "vegan":
         matching_meals = matching_meals.filter(
             dietary_type="vegan"
@@ -817,6 +823,9 @@ def recommendations(request):
 
         elif meal.dietary_type == "vegan":
             reasons.append("Vegan")
+
+        if meal.is_halal:
+            reasons.append("Halal-compatible")
 
         if meal.protein >= 25:
             reasons.append(

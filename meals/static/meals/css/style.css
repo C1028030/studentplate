@@ -235,12 +235,54 @@ a {
     color: #5e6d65;
 }
 
+/* Site Footer */
+
 .site-footer {
     padding: 30px 24px;
 
     background-color: #123f32;
     color: #ffffff;
     text-align: center;
+}
+
+.health-information {
+    max-width: 760px;
+    margin: 1.5rem auto 0;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: left;
+}
+
+.health-information-title {
+    margin: 0 0 0.75rem;
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+.health-information p {
+    margin: 0 0 0.75rem;
+    line-height: 1.6;
+}
+
+.health-information a {
+    color: #ffe082;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.2rem;
+}
+
+.health-information a:hover {
+    color: #ffffff;
+}
+
+.health-information a:focus-visible {
+    outline: 3px solid #ffe082;
+    outline-offset: 3px;
+}
+
+.health-information-disclaimer {
+    font-size: 0.9rem;
+    opacity: 0.9;
 }
 
 /* Smaller screens */

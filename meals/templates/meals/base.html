@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}StudentPlate{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'meals/css/style.css' %}?v=7">
+    <link rel="stylesheet" href="{% static 'meals/css/style.css' %}?v=8">
 </head>
 <body>
     <a class="skip-link" href="#main-content">
@@ -113,6 +113,38 @@
     <!--- Shared footer --->
     <footer class="site-footer">
         <p>StudentPlate prototype for Sheffield Hallam students.</p>
+
+        <div class="health-information">
+            <h2 class="health-information-title">
+                Healthy eating information
+            </h2>
+
+            <p>
+                General healthy eating guidance is available from the
+                <a
+                    href="https://www.nhs.uk/live-well/eat-well/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    NHS Eat Well Guidance
+                </a>
+                and the
+                <a
+                    href="https://www.gov.uk/government/publications/the-eatwell-guide"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    UK Government Eatwell Guide
+                </a>.
+            </p>
+
+            <p class="health-information-disclaimer">
+                StudentPlate provides general meal-planning support and does not
+                provide medical advice. Meal costs and nutritional values are
+                estimates. Anyone with medical or specialist dietary requirements
+                should consult a doctor or registered dietitian.
+            </p>
+        </div>
     </footer>
 
     <!-- Individual pages can load their own JavaScript -->

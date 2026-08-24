@@ -12,7 +12,8 @@
     "calories": 610,
     "protein": 42,
     "ingredients": "Chicken\r\nRice\r\nMixed Vegetables\r\nSoy sauce\r\nSeasoning",
-    "is_available": true
+    "is_available": true,
+    "is_halal": false
   }
 },
 {
@@ -28,7 +29,8 @@
     "calories": 520,
     "protein": 21,
     "ingredients": "Chickpeas\r\nSpices (cumin and paprika)\r\nMixed vegetables\r\nSauce (any)",
-    "is_available": true
+    "is_available": true,
+    "is_halal": true
   }
 },
 {
@@ -44,7 +46,8 @@
     "calories": 570,
     "protein": 35,
     "ingredients": "Canned tuna\r\nTomatoes\r\nPasta\r\nOlive oil\r\nSeasoning",
-    "is_available": true
+    "is_available": true,
+    "is_halal": true
   }
 },
 {
@@ -60,7 +63,8 @@
     "calories": 430,
     "protein": 18,
     "ingredients": "Oats\r\nMilk\r\nBanana",
-    "is_available": true
+    "is_available": true,
+    "is_halal": true
   }
 },
 {
@@ -76,7 +80,8 @@
     "calories": 390,
     "protein": 25,
     "ingredients": "Oats\r\nGreek yoghurt\r\nBanana\r\nFrozen berries\r\nHoney",
-    "is_available": true
+    "is_available": true,
+    "is_halal": true
   }
 },
 {
@@ -92,7 +97,8 @@
     "calories": 360,
     "protein": 20,
     "ingredients": "Red lentils\r\nChopped tomatoes\r\nCarrot\r\nOnion\r\nVegetable stock\r\nMixed herbs",
-    "is_available": true
+    "is_available": true,
+    "is_halal": true
   }
 },
 {
@@ -108,7 +114,8 @@
     "calories": 610,
     "protein": 28,
     "ingredients": "Noodles\r\nTofu\r\nMixed vegetables\r\nPeanut butter\r\nSoy sauce\r\nLime juice",
-    "is_available": true
+    "is_available": true,
+    "is_halal": true
   }
 },
 {
@@ -124,7 +131,8 @@
     "calories": 540,
     "protein": 24,
     "ingredients": "Rice\r\nEggs\r\nFrozen peas\r\nCarrot\r\nSoy sauce\r\nSpring onion",
-    "is_available": true
+    "is_available": true,
+    "is_halal": true
   }
 },
 {
@@ -140,7 +148,8 @@
     "calories": 580,
     "protein": 40,
     "ingredients": "Chicken breast\r\nTortilla wrap\r\nMixed peppers\r\nOnion\r\nLettuce\r\nFajita seasoning",
-    "is_available": true
+    "is_available": true,
+    "is_halal": false
   }
 },
 {
@@ -156,7 +165,8 @@
     "calories": 620,
     "protein": 22,
     "ingredients": "Baking potato\r\nKidney beans\r\nBlack beans\r\nChopped tomatoes\r\nOnion\r\nChilli powder",
-    "is_available": true
+    "is_available": true,
+    "is_halal": true
   }
 },
 {
@@ -172,7 +182,8 @@
     "calories": 560,
     "protein": 38,
     "ingredients": "Turkey mince\r\nCouscous\r\nMixed vegetables\r\nVegetable stock\r\nPaprika\r\nMixed herbs",
-    "is_available": true
+    "is_available": true,
+    "is_halal": false
   }
 },
 {
@@ -188,7 +199,8 @@
     "calories": 480,
     "protein": 30,
     "ingredients": "Baking potato\r\nCottage cheese\r\nSweetcorn\r\nSpring onion\r\nBlack pepper",
-    "is_available": true
+    "is_available": true,
+    "is_halal": true
   }
 }
 ]
