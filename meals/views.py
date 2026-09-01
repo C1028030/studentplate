@@ -606,6 +606,7 @@ def preferences(request):
             "maximum_price": "3.00",
             "maximum_time": "30",
             "health_goal": "balanced",
+            "cuisine_type": "any",
         },
     )
 
@@ -615,6 +616,11 @@ def preferences(request):
     if request.method == "POST":
         dietary_type = request.POST.get(
             "dietary_type",
+            "any",
+        )
+
+        cuisine_type = request.POST.get(
+            "cuisine_type",
             "any",
         )
 
@@ -640,6 +646,22 @@ def preferences(request):
             "vegan",
             "halal",
         }
+
+        allowed_cuisines = {
+            "any",
+            "british",
+            "italian",
+            "mediterranean",
+            "south_asian",
+            "east_asian",
+            "mexican",
+            "international",
+        }
+
+        if cuisine_type not in allowed_cuisines:
+            preference_errors.append(
+                "Select a valid cuisine preference."
+            )
 
         if dietary_type not in allowed_diets:
             preference_errors.append(
@@ -691,11 +713,13 @@ def preferences(request):
             "maximum_price": maximum_price,
             "maximum_time": maximum_time,
             "health_goal": health_goal,
+            "cuisine_type": cuisine_type,
         }
 
         if not preference_errors:
             saved_preferences = {
                 "dietary_type": dietary_type,
+                "cuisine_type": cuisine_type,
                 "maximum_price": f"{price_value:.2f}",
                 "maximum_time": str(time_value),
                 "health_goal": health_goal,
@@ -763,6 +787,11 @@ def recommendations(request):
         "any",
     )
 
+    cuisine_type = saved_preferences.get(
+        "cuisine_type",
+        "any",
+    )
+
     health_goal = saved_preferences.get(
         "health_goal",
         "balanced",
@@ -785,13 +814,19 @@ def recommendations(request):
         )
 
     elif dietary_type == "halal":
-        matching_meals == matching_meals.filter(
+        matching_meals = matching_meals.filter(
             is_halal=True
         )
 
     elif dietary_type == "vegan":
         matching_meals = matching_meals.filter(
             dietary_type="vegan"
+        )
+
+    # Apply preferred cuisine
+    if cuisine_type != "any":
+        matching_meals = matching_meals.filter(
+            cuisine_type=cuisine_type
         )
 
     # A higher-protein goal requires at least 25g protein
@@ -817,6 +852,11 @@ def recommendations(request):
             f"Costs £{meal.price:.2f}",
             f"Ready in {meal.prep_time} minutes",
         ]
+
+        if cuisine_type != "any":
+            reasons.append(
+                f"Matches your {meal.get_cuisine_type_display()} cuisine preference"
+            )
 
         if meal.dietary_type == "vegetarian":
             reasons.append("Vegetarian")
@@ -847,6 +887,7 @@ def recommendations(request):
         "maximum_time": maximum_time,
         "dietary_type": dietary_type,
         "health_goal": health_goal,
+        "cuisine_type": cuisine_type,
     }
 
     return render(

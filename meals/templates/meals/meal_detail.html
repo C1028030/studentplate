@@ -73,6 +73,11 @@
                 <strong>{{ meal.protein }}</strong>
                 <span>Protein</span>
             </article>
+
+            <article class="nutrition-item">
+                <strong>{{ meal.get_cuisine_type_display }}</strong>
+                <span>Cuisine style</span>
+            </article>
         </div>
 
         <!-- Add this meal to the weekly planner -->

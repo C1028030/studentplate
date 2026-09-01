@@ -14,7 +14,7 @@
             <h1>Your meal recommendations</h1>
 
             <p>
-                Meals selected using your dietary, price, time and
+                Meals selected using your dietary, cuisine, price, time and
                 health preferences.
             </p>
         </div>
@@ -48,6 +48,32 @@
                             Vegetarian
                         {% elif dietary_type == "vegan" %}
                             Vegan
+                        {% elif dietary_type == "halal" %}
+                            Halal-compatible
+                        {% else %}
+                            No preference
+                        {% endif %}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>Cuisine</span>
+
+                    <strong>
+                        {% if cuisine_type == "british" %}
+                            British
+                        {% elif cuisine_type == "italian" %}
+                            Italian
+                        {% elif cuisine_type == "mediterranean" %}
+                            Mediterranean
+                        {% elif cuisine_type == "south_asian" %}
+                            South Asian
+                        {% elif cuisine_type == "east_asian" %}
+                            East Asian
+                        {% elif cuisine_type == "mexican" %}
+                            Mexican
+                        {% elif cuisine_type == "international" %}
+                            Other / International
                         {% else %}
                             No preference
                         {% endif %}
@@ -100,6 +126,8 @@
                         <article class="recommendation-card">
                             <p class="meal-category">
                                 {{ recommendation.meal.category }}
+                                ·
+                                {{ recommendation.meal.get_cuisine_type_display }}
                             </p>
 
                             <h2>
@@ -153,7 +181,7 @@
 
                     <p>
                         Try increasing your price or preparation-time
-                        limit, or changing your dietary preference.
+                        limit, or changing your dietary or cuisine preference.
                     </p>
 
                     <a

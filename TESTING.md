@@ -4,6 +4,8 @@
 
 StudentPlate was tested throughout development using manual functional, usability, responsive and accessibility testing. Problems found during testing were corrected and tested again.
 
+Following user acceptance testing, a participant requested region-based meal recommendations. This feedback was applied through a preferred-cuisine setting, cuisine-based recommendation filtering and visible cuisine classifications throughout the interface.
+
 ## Recommendation testing
 
 | Test | Expected result | Actual result | Status |
@@ -13,12 +15,15 @@ StudentPlate was tested throughout development using manual functional, usabilit
 | Vegetarian preference | Only vegetarian and vegan meals are displayed | Standard meals were excluded while vegetarian and vegan meals remained | Pass |
 | Vegan preference | Only vegan meals are displayed | Only meals classified as vegan were returned | Pass |
 | Halal preference | Only meals marked as Halal-compatible are displayed | Non-Halal meals were excluded and matching meals displayed Halal-compatible as a recommendation reason | Pass |
+| Cuisine preference | Only meals matching the selected cuisine are displayed | Selecting East Asian returned only meals classified as East Asian | Pass |
+| No cuisine preference | Cuisine filtering is not applied | Meals from multiple cuisine types were displayed | Pass |
+| Combined dietary and cuisine preferences | Both preferences are applied simultaneously | Only meals matching both the dietary and cuisine selections were returned | Pass |
 | Higher-protein goal | Recommended meals contain at least 25g protein | Meals below 25g protein were excluded | Pass |
 | Maximum price | Meals above the selected price are excluded | All displayed meals were within the maximum price | Pass |
 | Maximum preparation time | Meals exceeding the selected time are excluded | All displayed meals were within the selected preparation time | Pass |
-| No matching meals | A helpful empty state is displayed | A message suggested changing preferences or browsing all meals | Pass |
+| No matching meals | A helpful empty state is displayed | A message suggested changing the dietary or cuisine preferences, adjusting other limits or browsing all meals | Pass |
 | Unavailable meal | Unavailable meals are excluded | The meal disappeared after being marked unavailable in Django Admin | Pass |
-| Recommendation explanation | Each result explains why it matched | Cost, time, dietary type and protein were displayed where relevant | Pass |
+| Recommendation explanation | Each result explains why it matched | Cost, time, cuisine match, dietary type and protein were displayed where relevant | Pass |
 
 ## Catalogue testing
 
@@ -32,6 +37,8 @@ StudentPlate was tested throughout development using manual functional, usabilit
 | Combined filters | All active filters are applied together | Results matched the search, category, price and time selections | Pass |
 | No catalogue results | A useful empty state is displayed | A no-results message and clear-filters option appeared | Pass |
 | Clear filters | Complete catalogue is restored | All meals appeared after filters were cleared | Pass |
+| Cuisine labels | Each meal displays its cuisine classification | Cuisine style appeared alongside the category on every meal card | Pass |
+| Dietary and Halal labels | Meal cards clearly display relevant dietary information | Dietary classifications and Halal-compatible labels appeared correctly without duplication | Pass |
 
 ## Budget testing
 
@@ -100,6 +107,7 @@ StudentPlate was tested throughout development using manual functional, usabilit
 | External health links | Health-information links open the correct official pages | Both official sources opened correctly in a new browser tab | Pass |
 | Health-link keyboard focus | Health-information links have visible keyboard focus | Both links displayed a visible yellow outline when reached using Tab | Pass |
 | Health disclaimer | The limitations of the prototype's information are explained | The footer stated that costs and nutrition are estimates and that StudentPlate does not provide medical advice | Pass |
+| Mobile meal labels | Cuisine, dietary and Halal labels remain visible on narrow screens | Responsive CSS was corrected and all labels remained visible below 750px | Fixed and retested |
 
 ## Technical testing and issues resolved
 
@@ -116,14 +124,15 @@ Several implementation issues were identified during development:
 - Conditional budget-status classes were corrected so overspending appeared in red.
 - Browser stylesheet versions were updated to prevent cached CSS from hiding changes.
 - Halal recommendation filtering initially failed because the queryset used a comparison operator instead of an assignment and checked the wrong model field. The filter was corrected to use `is_halal=True` and was successfully retested.
+- Meal-characteristic labels were initially hidden below the 750px responsive breakpoint. Mobile display rules were added and the labels were successfully retested.
 
 ## Final outcome
 
 The prototype successfully supports the intended core user journey:
 
 1. Set a weekly food budget.
-2. Save dietary preferences, including Halal-compatible meals, together with cost, time and health preferences.
-3. Receive personalised meal recommendations.
+2. Save dietary and cuisine preferences, including Halal-compatible meals, together with cost, time and health preferences.
+3. Receive personalised recommendations filtered by the selected dietary and cuisine preferences.
 4. Search and filter the complete meal catalogue.
 5. View meal cost and nutritional information.
 6. Save favourite meals.

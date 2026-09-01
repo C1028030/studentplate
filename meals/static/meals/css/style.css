@@ -1821,3 +1821,48 @@ a {
         flex-direction: column;
     }
 }
+
+.meal-labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.5rem 0 0.75rem;
+}
+
+.meal-label {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    padding: 0.3rem 0.65rem;
+    border: 1px solid #cbd8ce;
+    border-radius: 999px;
+    background-color: #f3f8f4;
+    color: #24452d;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.halal-label {
+    border-color: #9bc5a4;
+    background-color: #e7f5e9;
+    color: #185b29;
+}
+
+@media (max-width: 750px) {
+        .meal-labels {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        width: 100%;
+        margin: 0.5rem 0 0.75rem;
+        visibility: visible;
+    }
+
+    .meal-label {
+        display: inline-flex;
+        width: fit-content;
+        padding: 0.3rem 0.6rem;
+        font-size: 0.75rem;
+        visibility: visible;
+    }
+}

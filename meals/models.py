@@ -12,6 +12,17 @@ class Meal(models.Model):
         ("halal", "Halal-compatible"),
     ]
 
+    # Options used by the cuisine field
+    CUISINE_CHOICES = [
+        ("british", "British"),
+        ("italian", "Italian"),
+        ("mediterranean", "Mediterranean"),
+        ("south_asian", "South Asian"),
+        ("east_asian", "East Asian"),
+        ("mexican", "Mexican"),
+        ("international", "Other / International"),
+    ]
+
     # Basic meal information
     name = models.CharField(max_length=150)
     category = models.CharField(max_length=50)
@@ -20,6 +31,12 @@ class Meal(models.Model):
         max_length=20,
         choices=DIETARY_CHOICES,
         default="standard",
+    )
+
+    cuisine_type = models.CharField(
+        max_length=30,
+        choices=CUISINE_CHOICES,
+        default="international",
     )
     
     description = models.TextField()

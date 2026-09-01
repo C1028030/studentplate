@@ -139,7 +139,23 @@
                 <div class="meal-card-content">
                     <p class="meal-category">
                         {{ meal.category }}
+                        ·
+                        {{ meal.get_cuisine_type_display }}
                     </p>
+
+                    <div class="meal-labels" aria-label="Meal characteristics">
+                        {% if meal.dietary_type != halal %}
+                            <span class="meal-label">
+                                {{ meal.get_dietary_type_display }}
+                            </span>
+                        {% endif %}
+
+                        {% if meal.is_halal %}
+                            <span class="meal-label halal-label">
+                                Halal-compatible
+                            </span>
+                        {% endif %}
+                    </div>
 
                     <h3>
                         <a href="{% url 'meal_detail' meal.id %}">

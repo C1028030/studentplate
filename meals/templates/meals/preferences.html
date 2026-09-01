@@ -117,6 +117,95 @@
                 </label>
             </fieldset>
 
+            <!-- Preferred cuisine -->
+             <div class="preference-field">
+                <label for="cuisine-type">
+                    Preferred cuisine
+                </label>
+                
+                <p>
+                    Choose a cuisine style to personalise your recommendations.
+                </p>
+
+                <select
+                    id="cuisine-type"
+                    name="cuisine_type"
+                    required
+                >
+                    <option
+                        value="any"
+                        {% if not preferences.cuisine_type or preferences.cuisine_type == "any" %}
+                            selected
+                        {% endif %}
+                        >
+                            No cuisine preference
+                        </option>
+
+                        <option
+                            value="british"
+                            {% if preferences.cuisine_type == "british" %}
+                                selected
+                            {% endif %}
+                        >
+                            British
+                        </option>
+
+                        <option
+                            value="italian"
+                            {% if preferences.cuisine_type == "italian" %}
+                                selected
+                            {% endif %}
+                        >
+                            Italian
+                        </option>
+
+                        <option
+                            value="mediterranean"
+                            {% if preferences.cuisine_type == "mediterranean" %}
+                                selected
+                            {% endif %}
+                        >
+                            Mediterranean
+                        </option>
+
+                        <option
+                            value="south_asian"
+                            {% if preferences.cuisine_type == "south_asian" %}
+                                selected
+                            {% endif %}
+                        >
+                            South Asian
+                        </option>
+
+                        <option
+                            value="east_asian"
+                            {% if preferences.cuisine_type == "east_asian" %}
+                                selected
+                            {% endif %}
+                        >
+                            East Asian
+                        </option>
+
+                        <option
+                            value="mexican"
+                            {% if preferences.cuisine_type == "mexican" %}
+                                selected
+                            {% endif %}
+                        >
+                            Mexican
+                        </option>
+
+                        <option
+                            value="international"
+                            {% if preferences.cuisine_type == "international" %}
+                                selected
+                            {% endif %}
+                        >
+                            International
+                        </option>
+                </select>
+             </div>
+
             <!-- Price and preparation time -->
             <div class="preference-row">
                 <div class="preference-field">
