@@ -14,7 +14,9 @@
     "protein": 42,
     "ingredients": "Chicken\r\nRice\r\nMixed Vegetables\r\nSoy sauce\r\nSeasoning",
     "is_available": true,
-    "is_halal": false
+    "is_halal": false,
+    "cooking_method": "1. Cook the rice according to its packet instructions.\r\n\r\n2. Cut the chicken into small pieces and prepare the vegetables.\r\n\r\n3. Cook the chicken in a lightly oiled pan until completely cooked through.\r\n\r\n4. Add the vegetables, soy sauce and seasoning, then cook until the vegetables are hot and tender.\r\n\r\n5. Place the rice in a bowl, add the chicken and vegetables, and serve.",
+    "video_url": "https://youtu.be/wZEDWUE9838"
   }
 },
 {
@@ -32,7 +34,9 @@
     "protein": 21,
     "ingredients": "Chickpeas\r\nSpices (cumin and paprika)\r\nMixed vegetables\r\nSauce (any)",
     "is_available": true,
-    "is_halal": true
+    "is_halal": true,
+    "cooking_method": "1. Drain and rinse the chickpeas.\r\n\r\n2. Cook the chickpeas in a lightly oiled pan with the spices until hot and lightly crisp.\r\n\r\n3. Wash and prepare the salad ingredients.\r\n\r\n4. Warm the tortilla wraps according to their packet instructions.\r\n\r\n5. Fill each wrap with chickpeas, salad and yoghurt, then fold and serve.",
+    "video_url": "https://youtu.be/3Z3qvE-ydQ0"
   }
 },
 {
@@ -50,7 +54,9 @@
     "protein": 35,
     "ingredients": "Canned tuna\r\nTomatoes\r\nPasta\r\nOlive oil\r\nSeasoning",
     "is_available": true,
-    "is_halal": true
+    "is_halal": true,
+    "cooking_method": "1. Cook the pasta according to its packet instructions.\r\n\r\n2. Soften the chopped onion in a lightly oiled pan.\r\n\r\n3. Add the chopped tomatoes and seasoning, then simmer for several minutes.\r\n\r\n4. Drain the tuna and stir it into the tomato sauce until heated thoroughly.\r\n\r\n5. Drain the pasta, combine it with the sauce and serve.",
+    "video_url": "https://youtu.be/-Pk5dBS-r-M"
   }
 },
 {
@@ -68,7 +74,9 @@
     "protein": 18,
     "ingredients": "Oats\r\nMilk\r\nBanana",
     "is_available": true,
-    "is_halal": true
+    "is_halal": true,
+    "cooking_method": "1. Mash the banana in a bowl or reusable container.\r\n\r\n2. Add the oats, milk and yoghurt.\r\n\r\n3. Mix the ingredients thoroughly until combined.\r\n\r\n4. Cover the container and refrigerate overnight, or for at least 6 hours.\r\n\r\n5. Stir before eating and add a little more milk if required.",
+    "video_url": "https://youtu.be/RD6HmUFi5Z0"
   }
 },
 {
@@ -86,7 +94,9 @@
     "protein": 25,
     "ingredients": "Oats\r\nGreek yoghurt\r\nBanana\r\nFrozen berries\r\nHoney",
     "is_available": true,
-    "is_halal": true
+    "is_halal": true,
+    "cooking_method": "1. Place the oats in a bowl or reusable container.\r\n\r\n2. Add the Greek yoghurt and mix until evenly combined.\r\n\r\n3. Wash and prepare the fruit, then add it to the oats.\r\n\r\n4. Add a small amount of milk if a softer consistency is preferred.\r\n\r\n5. Serve immediately or refrigerate until required.",
+    "video_url": "https://youtu.be/2vMCN-2v578"
   }
 },
 {
@@ -104,7 +114,9 @@
     "protein": 20,
     "ingredients": "Red lentils\r\nChopped tomatoes\r\nCarrot\r\nOnion\r\nVegetable stock\r\nMixed herbs",
     "is_available": true,
-    "is_halal": true
+    "is_halal": true,
+    "cooking_method": "1. Soften the chopped onion and vegetables in a saucepan with a small amount of oil.\r\n\r\n2. Add the lentils, chopped tomatoes, stock and seasoning.\r\n\r\n3. Bring the mixture to a boil, then reduce the heat.\r\n\r\n4. Simmer for approximately 20 minutes until the lentils and vegetables are tender.\r\n\r\n5. Blend if a smoother texture is preferred, then serve hot.",
+    "video_url": "https://youtu.be/WC3mPUdSBZk"
   }
 },
 {
@@ -122,7 +134,9 @@
     "protein": 28,
     "ingredients": "Noodles\r\nTofu\r\nMixed vegetables\r\nPeanut butter\r\nSoy sauce\r\nLime juice",
     "is_available": true,
-    "is_halal": true
+    "is_halal": true,
+    "cooking_method": "1. Cook the noodles according to their packet instructions, then drain them.\r\n\r\n2. Cut the tofu into cubes and cook it in a lightly oiled pan until golden.\r\n\r\n3. Add the prepared vegetables and cook until slightly softened.\r\n\r\n4. Mix the peanut butter with soy sauce and a small amount of warm water to make a sauce.\r\n\r\n5. Add the noodles and sauce to the pan, stir thoroughly and heat before serving.",
+    "video_url": "https://youtu.be/FJ4-e5NYAB0"
   }
 },
 {
@@ -140,7 +154,9 @@
     "protein": 24,
     "ingredients": "Rice\r\nEggs\r\nFrozen peas\r\nCarrot\r\nSoy sauce\r\nSpring onion",
     "is_available": true,
-    "is_halal": true
+    "is_halal": true,
+    "cooking_method": "1. Heat a small amount of oil in a frying pan.\r\n\r\n2. Add the vegetables and cook until they begin to soften.\r\n\r\n3. Push the vegetables to one side, add the beaten egg and stir until cooked.\r\n\r\n4. Add the cooked rice and mix everything together thoroughly.\r\n\r\n5. Season with soy sauce, heat until piping hot and serve immediately.",
+    "video_url": "https://youtu.be/LU_r-NWdfSk"
   }
 },
 {
@@ -158,7 +174,9 @@
     "protein": 40,
     "ingredients": "Chicken breast\r\nTortilla wrap\r\nMixed peppers\r\nOnion\r\nLettuce\r\nFajita seasoning",
     "is_available": true,
-    "is_halal": false
+    "is_halal": false,
+    "cooking_method": "1. Slice the chicken and vegetables into thin strips.\r\n\r\n2. Cook the chicken in a lightly oiled pan until browned and completely cooked through.\r\n\r\n3. Add the vegetables and fajita seasoning, then cook until the vegetables have softened.\r\n\r\n4. Warm the tortilla wrap according to its packet instructions.\r\n\r\n5. Add the chicken mixture to the wrap, fold it securely and serve.",
+    "video_url": "https://youtu.be/A0l8ADpxyNg"
   }
 },
 {
@@ -176,7 +194,9 @@
     "protein": 22,
     "ingredients": "Baking potato\r\nKidney beans\r\nBlack beans\r\nChopped tomatoes\r\nOnion\r\nChilli powder",
     "is_available": true,
-    "is_halal": true
+    "is_halal": true,
+    "cooking_method": "1. Pierce the potato with a fork and cook it until soft throughout.\r\n\r\n2. Soften the onion and any other vegetables in a pan with a small amount of oil.\r\n\r\n3. Add the beans, chopped tomatoes and chilli seasoning.\r\n\r\n4. Simmer the bean chilli for 10–15 minutes, stirring occasionally.\r\n\r\n5. Cut open the potato, spoon the chilli over it and serve.",
+    "video_url": "https://youtu.be/cwvYGZckOOA"
   }
 },
 {
@@ -194,7 +214,9 @@
     "protein": 38,
     "ingredients": "Turkey mince\r\nCouscous\r\nMixed vegetables\r\nVegetable stock\r\nPaprika\r\nMixed herbs",
     "is_available": true,
-    "is_halal": false
+    "is_halal": false,
+    "cooking_method": "1. Place the couscous in a bowl and cover it with the recommended amount of boiling water.\r\n\r\n2. Cover the bowl and leave the couscous for 5 minutes.\r\n\r\n3. Cook the turkey pieces in a lightly oiled pan until browned and completely cooked through.\r\n\r\n4. Fluff the couscous with a fork and mix in the prepared vegetables and seasoning.\r\n\r\n5. Place the turkey over the couscous and serve.",
+    "video_url": "https://youtu.be/GZQGy9oscVk"
   }
 },
 {
@@ -212,7 +234,9 @@
     "protein": 30,
     "ingredients": "Baking potato\r\nCottage cheese\r\nSweetcorn\r\nSpring onion\r\nBlack pepper",
     "is_available": true,
-    "is_halal": true
+    "is_halal": true,
+    "cooking_method": "1. Pierce the potato several times with a fork.\r\n\r\n2. Microwave for 8–10 minutes, turning halfway through, until soft throughout.\r\n\r\n3. Carefully cut the potato open and fluff the inside with a fork.\r\n\r\n4. Spoon the cottage cheese over the potato.\r\n\r\n5. Add seasoning and any prepared salad or vegetables before serving.",
+    "video_url": "https://youtu.be/WUFEpgCGweg"
   }
 }
 ]

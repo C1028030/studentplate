@@ -65,6 +65,18 @@ class Meal(models.Model):
     # Halal food
     is_halal = models.BooleanField(default=True)
 
+    # Cooking instructions entered with one step on each line
+    cooking_method = models.TextField(
+        blank=True,
+        help_text="Enter each cooking step on a separate line"
+    )
+
+    # YouTube video identifier or URL
+    video_url = models.URLField(
+        blank=True,
+        help_text="Optional YouTube tutorial URL"
+    )
+
     def __str__(self):
         # Controls how the meal is labelled in Django admin
         return self.name

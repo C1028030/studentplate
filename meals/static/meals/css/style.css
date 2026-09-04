@@ -1866,3 +1866,91 @@ a {
         visibility: visible;
     }
 }
+
+/* Recipe instructions and video */
+/* Centred recipe tutorial section */
+.recipe-tutorial {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(260px, 1fr);
+    align-items: start;
+    gap: 1.5rem;
+    width: calc(100% - 2rem);
+    max-width: 950px;
+    margin: 2rem auto;
+}
+
+/* Written instructions and video panels */
+.recipe-method,
+.recipe-video {
+    width: 100%;
+    padding: 1.5rem;
+    border: 1px solid #dce7de;
+    border-radius: 1rem;
+    background-color: #ffffff;
+    box-sizing: border-box;
+}
+
+.recipe-method h2,
+.recipe-video h2 {
+    margin: 0 0 1rem;
+    color: #183f27;
+}
+
+/* Numbered cooking steps */
+.method-steps {
+    display: grid;
+    gap: 0.85rem;
+    margin: 0;
+    padding-left: 1.75rem;
+}
+
+.method-steps li {
+    padding-left: 0.35rem;
+    line-height: 1.6;
+}
+
+.method-steps li::marker {
+    color: #26733c;
+    font-weight: 700;
+}
+
+/* Video tutorial link */
+.recipe-video a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    border-radius: 0.6rem;
+    background-color: #26733c;
+    color: #ffffff;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.recipe-video a:hover {
+    background-color: #185b29;
+}
+
+.recipe-video a:focus-visible {
+    outline: 3px solid #e0b52f;
+    outline-offset: 3px;
+}
+
+/* Tablet and mobile layout */
+@media (max-width: 750px) {
+    .recipe-tutorial {
+        grid-template-columns: 1fr;
+        width: calc(100% - 2rem);
+        margin: 1.5rem auto;
+    }
+
+    .recipe-method,
+    .recipe-video {
+        padding: 1.1rem;
+    }
+
+    .recipe-video a {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}

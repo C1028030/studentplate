@@ -39,6 +39,15 @@ Following user acceptance testing, a participant requested region-based meal rec
 | Clear filters | Complete catalogue is restored | All meals appeared after filters were cleared | Pass |
 | Cuisine labels | Each meal displays its cuisine classification | Cuisine style appeared alongside the category on every meal card | Pass |
 | Dietary and Halal labels | Meal cards clearly display relevant dietary information | Dietary classifications and Halal-compatible labels appeared correctly without duplication | Pass |
+| Cooking instructions | Each meal displays its own instructions | The correct method was displayed on each meal-detail page | Pass |
+| Numbered method | Instructions appear as sequential steps without blanks or duplicated numbers | Each line was displayed as one correctly numbered step | Pass |
+| Video tutorial | The correct tutorial is available from the meal page | The video link opened the appropriate external tutorial in a new tab | Pass |
+| Missing video | Written instructions remain usable when no video is available | The method remained visible and no empty video panel was displayed | Pass |
+| External-link security | External links do not give the destination access to the original page | Video links used `rel="noopener noreferrer"` | Pass |
+| Desktop recipe layout | Method and video sections are centred and clearly presented | Both sections appeared within the centred content area | Pass |
+| Mobile recipe layout | Tutorial content stacks without horizontal scrolling | Method and video sections stacked correctly below 750px | Pass |
+| Food-safety information | Approximate timings and poultry safety are explained | A safety note was displayed beneath the tutorial content | Pass |
+| Fixture restoration | Recipe information can be restored from the fixture | All 12 records loaded successfully from `initial_meals.json` | Pass |
 
 ## Budget testing
 
@@ -125,6 +134,9 @@ Several implementation issues were identified during development:
 - Browser stylesheet versions were updated to prevent cached CSS from hiding changes.
 - Halal recommendation filtering initially failed because the queryset used a comparison operator instead of an assignment and checked the wrong model field. The filter was corrected to use `is_halal=True` and was successfully retested.
 - Meal-characteristic labels were initially hidden below the 750px responsive breakpoint. Mobile display rules were added and the labels were successfully retested.
+- The meal fixture initially used the Windows default text encoding and could not be loaded after cooking instructions introduced special punctuation. It was re-exported as UTF-8 and loaded successfully.
+- Empty lines and manually entered numbers initially produced blank and duplicated method steps. Instructions were stored without typed numbering and blank steps were excluded.
+- The recipe tutorial initially extended across the full viewport. A centred maximum-width layout and responsive breakpoint were added and retested.
 
 ## Final outcome
 

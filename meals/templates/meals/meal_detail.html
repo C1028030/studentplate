@@ -123,4 +123,36 @@
             </div>
         </section>
     </section>
+
+    <section class="recipe-tutorial">
+        <div class="recipe-method">
+            <h2>Step-by-step method</h2>
+
+            {% if meal.cooking_method %}
+                <ol class="method-steps">
+                    {% for step in meal.cooking_method.splitlines %}
+                        {% if step %}
+                            <li>{{ step }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ol>
+            {% else %}
+                <p>Cooking instructions are not currently available.</p>
+            {% endif %}
+        </div>
+
+        {% if meal.video_url %}
+            <div class="recipe-video">
+                <h2>Video Tutorial</h2>
+
+                <a
+                    href="{{ meal.video_url }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Watch Video Tutorial
+                </a>
+            </div>
+        {% endif %}
+    </section>
 {% endblock %}

@@ -193,6 +193,17 @@ def meal_detail(request, meal_id):
         "is_favourite": meal.id in favourite_ids,
     }
 
+    method_steps = [
+        step.strip()
+        for step in meal.cooking_method.splitlines()
+        if step.strip()
+    ]
+
+    context = {
+        "meal": meal,
+        "method_steps": method_steps,
+    }
+
     return render(request, "meals/meal_detail.html", context)
 
 # Displays the weekly budget calculator
